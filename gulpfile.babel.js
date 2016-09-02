@@ -25,7 +25,7 @@ let resolveToApp = (glob = '') => {
 };
 
 let resolveToComponents = (glob = '') => {
-  return path.join(root, 'app/components', glob); // app/components/{glob}
+  return path.join(root, 'app/', glob); // app/components/{glob}
 };
 
 // map of all paths
