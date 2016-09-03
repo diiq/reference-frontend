@@ -1,17 +1,20 @@
 class LoginController {
-  constructor(UsersService) {
-    this.name = 'login';
-    this.UsersService = UsersService;
+  constructor($auth, $http) {
+    this.$auth = $auth;
+    this.$http = $http;
   }
 
   submit() {
-    console.log("OK");
-    this.UsersService.login(this.email, this.password).then(() => {
-      this.name = "hooray";
+    this.$auth.submitLogin({
+        email: this.email,
+        password: this.password}
+    ).then(() => {
+      console.log("u win");
+      this.$http.get(this.$auth.apiUrl() + "/references");
     });
   }
 }
 
-LoginController.$inject = ['UsersService'];
+LoginController.$inject = ['$auth', '$http'];
 
 export default LoginController;
