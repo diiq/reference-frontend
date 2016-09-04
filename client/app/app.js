@@ -24,3 +24,17 @@ angular.module('app', [
 
   .component('app', AppComponent);
   
+
+
+angular.module('app').config(
+  ($transitionsProvider) => {
+    "ngInject";
+    $transitionsProvider.onStart({
+      to: (state) => state.data && state.data.requiresAuth
+    }, function(transition) {
+      var $auth = transition.injector().get('$auth');
+      var $state = transition.injector().get('$state');
+      $auth.validateUser().catch(() => { $state.go('login'); });
+    });
+  }
+);

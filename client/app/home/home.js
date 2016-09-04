@@ -13,13 +13,14 @@ let homeModule = angular.module('home', [
 
   $urlRouterProvider.otherwise('/');
 
-  $stateProvider
-    .state('home', {
-      url: '/',
-      component: 'home'
-    });
+  $stateProvider.state('home', {
+    url: '/',
+    component: 'home',
+    data: {
+      requiresAuth: true
+    }
+  });
 })
-
 .component('home', homeComponent)
   
 .name;
