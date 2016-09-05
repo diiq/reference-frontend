@@ -1,6 +1,18 @@
-<main>
-  <div>
-    <h1>Found in {{ $ctrl.name }}.html</h1>
-Hi! <a ui-sref='login'>OK</a>
+<div>
+  <h1>References</h1>
+  Hi! <a ui-sref='login'>Login</a>
+  <a ng-click="$ctrl.newRef()"> Add ref </a>
+
+  <div  ng-repeat="reference in $ctrl.references"> 
+  <reference-thumbnail  
+    
+     reference="reference">
+  </reference-thumbnail>
+  <div ng-if="reference.presigned_put">
+    <form ng-submit="$ctrl.upload(reference)">
+      <input type="file" ng-model="$ctrl.file">
+      {{$ctrl.file}}
+      <input type="submit">
+    </form>
   </div>
-</main>
+</div>
