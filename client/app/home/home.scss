@@ -1,0 +1,20 @@
+@import '../common/common';
+
+home {
+  reference-thumbnail {
+    @include media($max-width-grid) {
+      @include span-columns(2);
+      //@include omega(6n);
+    }
+
+    @include media($tablet-grid) {
+      @include span-columns(2);
+      @include omega(4n);
+    }
+
+    @include media($mobile-grid) {
+      @include span-columns(4);
+      //@include omega(1n);
+    }
+  }
+}

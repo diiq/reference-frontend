@@ -1,4 +1,3 @@
-<div>
-  <h3>{{ $ctrl.reference.id }}</h3>
-  <div>{{ $ctrl.reference.notes }}</div>
-</div>
+<a ui-sref="reference/{{$ctrl.reference.id}}">
+  <img ng-src="{{$ctrl.reference.square}}">
+</a>

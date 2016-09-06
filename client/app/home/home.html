@@ -1,18 +1,8 @@
-<div>
-  <h1>References</h1>
-  Hi! <a ui-sref='login'>Login</a>
-  <a ng-click="$ctrl.newRef()"> Add ref </a>
+<h1>References: {{$ctrl.references.length}}</h1>
 
-  <div  ng-repeat="reference in $ctrl.references"> 
-  <reference-thumbnail  
-    
-     reference="reference">
+<reference-uploader></reference-uploader>
+<div class="grid-container">
+  <reference-thumbnail ng-repeat="reference in $ctrl.references" 
+                       reference="reference">
   </reference-thumbnail>
-  <div ng-if="reference.presigned_put">
-    <form ng-submit="$ctrl.upload(reference)">
-      <input type="file" ng-model="$ctrl.file">
-      {{$ctrl.file}}
-      <input type="submit">
-    </form>
-  </div>
 </div>

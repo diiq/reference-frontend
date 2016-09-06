@@ -3,14 +3,14 @@ angular.module('home', [
   'references'
 ])
 
-.config ($stateProvider, $urlRouterProvider) =>
+.config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise('/');
 
   $stateProvider.state 'home',
     url: '/'
     component: 'home'
     resolve: 
-      references: (ReferenceService) => 
+      references: (ReferenceService) -> 
         ReferenceService.references()
       
 require './home.component.coffee'

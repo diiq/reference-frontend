@@ -1,7 +1,7 @@
 {
-  "name": "ng6-starter",
+  "name": "reference",
   "version": "0.0.1",
-  "description": "Starter for Angular + ES6 + (Webpack or JSPM)",
+  "description": "a tool for managing artist's references",
   "main": "index.js",
   "dependencies": {
     "angular": "^1.5.0",

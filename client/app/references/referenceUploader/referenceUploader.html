@@ -1,0 +1,11 @@
+
+
+<div id="reference-uploader-drop" ng-show="$ctrl.dropping"></div>
+
+<div ng-if="$ctrl.files.length" ng-repeat="file in $ctrl.files">
+  <span>{{file.webkitRelativePath || file.name}}</span>
+  (<span ng-switch="file.size > 1024*1024">
+    <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+    <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+  </span>)
+</div>

@@ -120,7 +120,7 @@ gulp.task('clean', (cb) => {
   del([paths.dest]).then(function (paths) {
     gutil.log("[clean]", paths);
     cb();
-  })
+  });
 });
 
 gulp.task('default', ['watch']);
