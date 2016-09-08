@@ -7,4 +7,4 @@ describe ReferenceUploaderController, ->
 
   it "isn't false", ->
     expect(true).toBe(false)
-    
+
