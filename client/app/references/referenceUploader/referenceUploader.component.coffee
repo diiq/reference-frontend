@@ -68,3 +68,6 @@ angular.module('references').component 'referenceUploader',
   restrict: 'E'
   template: template
   controller: ReferenceUploaderController
+
+
+module.exports.ReferenceUploaderController = ReferenceUploaderController

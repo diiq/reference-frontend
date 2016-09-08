@@ -2,14 +2,12 @@
   "name": "reference",
   "version": "0.0.1",
   "description": "a tool for managing artist's references",
-  "main": "index.js",
   "dependencies": {
     "angular": "^1.5.0",
     "angular-ui-router": "^1.0.0-beta.1",
     "font-awesome": "^4.6.3",
     "he": "^1.1.0",
-    "lodash": "^4.15.0",
-    "normalize.css": "^3.0.3"
+    "lodash": "^4.15.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
@@ -38,9 +36,13 @@
     "gulp-template": "^3.0.0",
     "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^1.7.0",
+    "jasmine": "^2.5.1",
+    "jasmine-core": "^2.5.1",
     "karma": "^0.13.9",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-diff-reporter": "^0.6.2",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.4",
@@ -50,6 +52,7 @@
     "ng-annotate-loader": "0.0.10",
     "node-libs-browser": "^0.5.0",
     "node-sass": "^3.8.0",
+    "null-loader": "^0.1.1",
     "raw-loader": "^0.5.1",
     "run-sequence": "^1.1.0",
     "sass-loader": "^4.0.0",
@@ -60,18 +63,10 @@
     "webpack-hot-middleware": "^2.6.0",
     "yargs": "^3.9.0"
   },
-  "scripts": {
-    "test": "karma start"
-  },
-  "keywords": [
-    "angular",
-    "webpack",
-    "es6"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/NG6-starter.git"
+    "url": "https://github.com/diiq/reference-frontend.git"
   },
-  "author": "AngularClass",
-  "license": "Apache-2.0"
+  "author": "Sam Bleckley",
+  "license": "UNLICENSED"
 }

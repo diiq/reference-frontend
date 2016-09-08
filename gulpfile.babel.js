@@ -111,8 +111,6 @@ gulp.task('serve', () => {
   });
 });
 
-gulp.task('watch', ['serve']);
-
 gulp.task('component', () => {
   const cap = (val) => {
     return val.charAt(0).toUpperCase() + val.slice(1);
@@ -139,4 +137,4 @@ gulp.task('clean', (cb) => {
   });
 });
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['serve']);

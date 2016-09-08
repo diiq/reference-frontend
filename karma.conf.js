@@ -5,35 +5,36 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['jasmine'],
 
     // list of files/patterns to load in the browser
-    files: [{ pattern: 'spec.bundle.js', watched: false }],
+    files: [{ pattern: 'spec.bundle.coffee', watched: false }],
 
     // files to exclude
     exclude: [],
 
     plugins: [
-      require("karma-chai"),
       require("karma-chrome-launcher"),
-      require("karma-mocha"),
-      require("karma-mocha-reporter"),
       require("karma-sourcemap-loader"),
-      require("karma-webpack")
+      require("karma-webpack"),
+      require("karma-jasmine"),
+      require("karma-jasmine-diff-reporter"),
     ],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: { 'spec.bundle.js': ['webpack', 'sourcemap'] },
+    preprocessors: { 'spec.bundle.coffee': ['webpack', 'sourcemap'] },
 
     webpack: {
       devtool: 'inline-source-map',
       module: {
         loaders: [
           { test: /\.js/, exclude: [/app\/lib/, /node_modules/], loader: 'babel' },
+          { test: /\.coffee$/, exclude: [/node_modules/], loader: 'coffee' },
           { test: /\.html/, loader: 'raw' },
-          { test: /\.styl$/, loader: 'style!css!stylus' },
-          { test: /\.css$/, loader: 'style!css' }
+          { test: /\.scss$/, loader: 'style!css!sass' },
+          { test: /\.css$/, loader: 'style!css' },
+          { test: /\.(jpg|png|svg|gif)$/, loader: 'null-loader' }
         ]
       }
     },
@@ -43,7 +44,7 @@ module.exports = function (config) {
     },
 
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['jasmine-diff', 'progress'],
 
     // web server port
     port: 9876,
@@ -56,13 +57,13 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
 
     // toggle whether to watch files and rerun tests upon incurring changes
-    autoWatch: false,
+    autoWatch: true,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
     // if true, Karma runs tests once and exits
-    singleRun: true
+    singleRun: false
   });
 };
