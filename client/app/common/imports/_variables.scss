@@ -21,8 +21,9 @@ $base-z-index: 0;
 
 // Colors
 $black: #211E1B;
-$orange: #1565c0;
+$orange: #FF9000;
 $yellow: #FFC200;
+$yellow-hover: shade($yellow, 10%);
 $green: #AFBF1D;
 $green-hover: shade($green, 10%);
 $red: #A61A00;

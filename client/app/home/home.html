@@ -1,6 +1,7 @@
 <reference-uploader></reference-uploader>
 <div class="grid-container">
-  <reference-thumbnail ng-repeat="reference in $ctrl.references" 
-                       reference="reference">
+  <reference-thumbnail 
+     ng-repeat="reference in $ctrl.references track by reference.id"
+     reference="reference">
   </reference-thumbnail>
 </div>

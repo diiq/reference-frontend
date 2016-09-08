@@ -29,16 +29,19 @@ let resolveToComponents = (glob = '') => {
 };
 
 // map of all paths
+let entries = (config) => {
+  return [
+    path.join(__dirname, root, 'app/app.coffee'),
+    path.join(__dirname, root, 'app/config/' + config + '.coffee')
+  ];
+}
+
 let paths = {
   js: resolveToComponents('**/*!(.spec.js).js'), // exclude spec files
-  styl: resolveToApp('**/*.styl'), // stylesheets
+  styl: resolveToApp('**/*.scss'), // stylesheets
   html: [
     resolveToApp('**/*.html'),
     path.join(root, 'index.html')
-  ],
-  entry: [
-    'babel-polyfill',
-    path.join(__dirname, root, 'app/app.coffee')
   ],
   output: root,
   blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
@@ -48,7 +51,7 @@ let paths = {
 // use webpack.config.js to build modules
 gulp.task('webpack', ['clean'], (cb) => {
   const config = require('./webpack.dist.config');
-  config.entry.app = paths.entry;
+  config.entry.app = entries('dist');
 
   webpack(config, (err, stats) => {
     if(err)  {
@@ -65,6 +68,19 @@ gulp.task('webpack', ['clean'], (cb) => {
   });
 });
 
+gulp.task('deploy', ['webpack'], () => {
+  const awspublish = require('gulp-awspublish');
+  const awspublishRouter = require('gulp-awspublish-router');
+  var publisher = awspublish.create({ params: {
+    Bucket: 'www.reference-board.com' 
+  }});
+
+  gulp.src('./dist/*')
+    .pipe(publisher.publish())
+    .pipe(publisher.sync())
+    .pipe(awspublish.reporter());
+});
+
 gulp.task('serve', () => {
   const config = require('./webpack.dev.config');
   config.entry.app = [
@@ -72,7 +88,7 @@ gulp.task('serve', () => {
     // it responsible for all this webpack magic
     'webpack-hot-middleware/client?reload=true',
     // application entry point
-  ].concat(paths.entry);
+  ].concat(entries('dev'));
 
   var compiler = webpack(config);
 

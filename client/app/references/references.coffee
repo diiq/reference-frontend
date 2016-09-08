@@ -1,4 +1,4 @@
-angular.module('references', ['ui.router'])
+angular.module('references', ['ui.router', 'config'])
 
 .config ($stateProvider, $urlRouterProvider) ->
   $stateProvider.state 'reference',

@@ -11,7 +11,13 @@ module.exports = {
        { test: /\.coffee$/, exclude: [/node_modules/], loader: 'ng-annotate!coffee' },
        { test: /\.html$/, loader: 'raw' },
        { test: /\.scss$/, loader: 'style!css!sass' },
-       { test: /\.css$/, loader: 'style!css' }
+       { test: /\.css$/, loader: 'style!css' },
+       { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192' },
+       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=8192&mimetype=application/font-woff" }, 
+       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=8192&mimetype=application/font-woff" }, 
+       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=8192&mimetype=application/octet-stream" }, 
+       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" }, 
+       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=8192&mimetype=image/svg+xml" }
     ]
   },
   plugins: [

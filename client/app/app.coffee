@@ -9,6 +9,8 @@ require './references/references.coffee'
 require './home/home.coffee'
 require './users/users.coffee'
 
+require 'font-awesome/css/font-awesome.css'
+
 angular.module('app', [
   'ui.router',
   'home',
@@ -17,11 +19,11 @@ angular.module('app', [
 ])
 
 .config ($locationProvider) -> 
-  $locationProvider.html5Mode(true).hashPrefix('!');
+  $locationProvider.hashPrefix('!');
 
-.config ($authProvider) -> 
+.config ($authProvider, config) -> 
   $authProvider.configure
-    apiUrl: 'http://localhost:5000/api/v1'
+    apiUrl: config.apiBase + '/api/v1'
 
 .config ($transitionsProvider) ->
   authorizeTransition = (transition) ->

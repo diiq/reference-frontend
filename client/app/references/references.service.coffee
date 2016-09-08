@@ -1,8 +1,8 @@
 _ = require 'lodash'
 
 class ReferenceService 
-  constructor: (@$http, @$rootScope) ->
-    this.url = 'http://localhost:5000/api/v1/references'
+  constructor: (@$http, @$rootScope, config) ->
+    this.url = config.apiBase + '/api/v1/references'
     @cache = new ReferenceCache()
 
   urlFor: (reference) ->
