@@ -1,5 +1,6 @@
 template = require './referenceUploader.html'
 css = require './referenceUploader.scss'
+he = require 'he'
 
 class ReferenceUploaderController
   constructor: (@$scope, @ReferenceService, @$http) ->
@@ -31,48 +32,36 @@ class ReferenceUploaderController
     @dropping = false
 
   dragOver: (event) =>
-    console.log("over");
-    ok = (event.dataTransfer &&
-          event.dataTransfer.types &&
-          event.dataTransfer.types.indexOf('Files') >= 0)
-    @dropClass = ok ? 'over' : 'not-available'
 
   drop: (event) =>
-    console.log 'drop evt:', JSON.parse(JSON.stringify(event.dataTransfer))
-    @dropText = 'Drop files here...'
-    @dropClass = ''
+    @dropping = false
 
+    data = event.dataTransfer
+    if data.types.indexOf('text/html') != -1
+      @transferHTML(data.getData('text/html'))
+    else if data.types.indexOf('text/plain') != -1
+      @transferURL(data.getData('text/plain'))
+    else if data.files.length > 0
+      @transferFiles(data.files)
+    else
+      debugger
+      alert("whoopes")
+
+  srcRegex: /src=.([^\'\"]*)/ig
+  urlRegex: /^https?:\/\/.*/i
+
+  transferFiles: (files) ->
     for file in event.dataTransfer.files
       @ReferenceService.newReferenceFromFile(file)
 
-    @dropping = false
-        
-  uploadProgress: (event) =>
-    @$scope.$apply =>
-      if (event.lengthComputable) 
-        @progress = Math.round(event.loaded * 100 / event.total)
-      else 
-        @progress = 'unable to compute'
+  transferHTML: (html) ->
+    while(match = @srcRegex.exec(html))
+      url = he.decode(match[1])
+      @ReferenceService.newReferenceFromURL(url)
 
-  uploadComplete: (event) =>
-    @$scope.$apply =>
-      @progressVisible = false
-      
-    alert(event.target.responseText)
-
-  uploadFailed: (event) =>
-    @$scope.$apply =>
-      @progressVisible = false
-        
-    alert("There was an error attempting to upload the file.")
-
-  uploadCanceled: (event) =>
-    @$scope.$apply =>
-      @progressVisible = false
-
-    alert("The upload has been canceled by the user or the browser dropped the connection.")
-
-
+  transferURL: (url) ->
+    if url.match(@urlRegex)
+      @ReferenceService.newReferenceFromURL(url)
 
 
 angular.module('references').component 'referenceUploader',

@@ -3,30 +3,27 @@ _ = require 'lodash'
 class ReferenceService 
   constructor: (@$http, @$rootScope) ->
     this.url = 'http://localhost:5000/api/v1/references'
-    @cachedReferences = []
+    @cache = new ReferenceCache()
+
+  urlFor: (reference) ->
+    @url + "/" + reference.id
 
   references: () ->
     @$http.get(@url).then (response) =>
-      # This looks very silly and non-performant --- but
-      # what it does is allow us to display the reference list instantly
-      # if we already have one, but refresh it from the server once we
-      # get a response.
-      @cachedReferences.length = 0
-      for reference in  response.data.references
-        @cachedReferences.push reference
-    @cachedReferences
+      @cache.refresh response.data.references
+    @cache.array
 
   reference: (id) ->
-    reference = _.find(@cachedReferences, {id: id}) || {}
+    reference = @cache.find(id)
     @$http.get(@url + "/#{id}").then (response) -> 
       _.update reference, response.data
     reference
-      
+
   newReference: () ->
     @$http.post @url, 
       reference: { notes: null }
-    .then (response) => 
-      response.data
+    .then (response) =>
+      @cache.add(response.data)
 
   newReferenceFromFile: (file) ->
     @newReference().then (reference) =>
@@ -35,16 +32,50 @@ class ReferenceService
           'If-Modified-Since': undefined
       .then =>
         # the default url is the s3 upload url
-        @setFromURL(reference).then (response) =>
-          # Tell everyone to add it to their list of refs
-          @$rootScope.$broadcast 'reference:new',
-            reference: response.data
+        @setFromURL(reference)
+
+  newReferenceFromURL: (url) ->
+    @newReference().then (reference) =>
+      @setFromURL(reference, url)
 
   setFromURL: (reference, url) ->
-    @$http.post @url + "/#{reference.id}/set_from_url",
+    @$http.post @urlFor(reference) + "/set_from_url",
       url: url
+    .then (response) =>
+      console.log @cache
+      reference = @cache.find(reference.id)
+      _.merge reference, response.data
+      reference
+
+  delete: (reference) ->
+    @$http.delete(@urlFor(reference)).then =>
+      @cache.remove(reference.id)
 
 
+class ReferenceCache
+  # It's a shared array and a hash, together
+  constructor: () ->
+    @array = []
+    @hash = {}
+
+  find: (id) ->
+    @hash[id] || @add({id :id})
+
+  remove: (id) ->
+    delete @hash[id]
+    _.remove @array, {id: id}
+
+  add: (reference) ->
+    @array.push(reference)
+    @hash[reference.id] = reference
+    reference
+
+  refresh: (references) ->
+    @hash = {}
+    @array.length = 0
+    for reference in references
+      @add(reference)
+      
 angular.module('references').service('ReferenceService', ReferenceService)
 
 

@@ -3,11 +3,11 @@ $medium-screen: 600px;
 $large-screen: 900px;
 
 // Typography
-$base-font-family: sans;
-$heading-font-family: sans;
+$base-font-family: sans-serif;
+$heading-font-family: sans-serif;
 
 // Font Sizes
-$base-font-size: 1em;
+$base-font-size: 16px;
 
 // Line height
 $base-line-height: 1.5;
@@ -15,19 +15,26 @@ $heading-line-height: 1.2;
 
 // Other Sizes
 $base-border-radius: 3px;
-$base-spacing: $base-line-height * 1em;
+$base-spacing: 8px;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$blue: #1565c0;
-$dark-gray: #333;
-$medium-gray: #999;
-$light-gray: #ddd;
+$black: #211E1B;
+$orange: #1565c0;
+$yellow: #FFC200;
+$green: #AFBF1D;
+$green-hover: shade($green, 10%);
+$red: #A61A00;
+$red-hover: shade($red, 10%);
+$dark-gray: lighten($black, 15%);
+$medium-gray: lighten($black, 30%);
+$medium-gray-hover: lighten($black, 17%);
+$light-gray: lighten($black, 75%);
 
 // Font Colors
 $base-font-color: $dark-gray;
-$action-color: $blue;
+$action-color: $orange;
 
 // Border
 $base-border-color: $light-gray;

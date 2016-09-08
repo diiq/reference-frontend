@@ -2,9 +2,11 @@
 
 home {
   reference-thumbnail {
+    margin-bottom: $base-spacing;
+
     @include media($max-width-grid) {
       @include span-columns(2);
-      //@include omega(6n);
+      @include omega(6n);
     }
 
     @include media($tablet-grid) {
@@ -13,8 +15,8 @@ home {
     }
 
     @include media($mobile-grid) {
-      @include span-columns(4);
-      //@include omega(1n);
+      @include span-columns(2);
+      @include omega(2n);
     }
   }
 }

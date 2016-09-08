@@ -2,7 +2,7 @@
   appearance: none;
   background-color: $action-color;
   border: 0;
-  border-radius: $base-border-radius;
+  border-radius: 0;
   color: #fff;
   cursor: pointer;
   display: inline-block;
@@ -21,7 +21,7 @@
 
   &:hover,
   &:focus {
-    background-color: shade($action-color, 20%);
+    background-color: shade($action-color, 10%);
     color: #fff;
   }
 
@@ -32,5 +32,12 @@
     &:hover {
       background-color: $action-color;
     }
-  }
+  }    
+}
+
+
+.button-bar #{$all-buttons} {
+  display: block;
+  float: left;
+  height: 100%;    
 }

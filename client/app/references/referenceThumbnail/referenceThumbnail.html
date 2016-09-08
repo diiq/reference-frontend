@@ -1,3 +1,19 @@
-<a ui-sref="reference({id:'{{$ctrl.reference.id}}'})">
-  <img ng-src="{{$ctrl.reference.square}}">
-</a>
+<div class="reference-thumbnail-wrapper" 
+     ng-mouseenter="$ctrl.hover()" 
+     ng-mouseleave="$ctrl.unhover()">
+  <div class="menu" ng-show="$ctrl.hovering">
+    <div ng-click="$ctrl.deleting = true"><i class="fa fa-trash">trash</i></div>
+  </div>
+  <div class="delete-menu button-bar" ng-class="{visible: $ctrl.deleting}">
+    <button class="delete" ng-click="$ctrl.delete()">Delete</button>
+    <button class="cancel" ng-click="$ctrl.deleting = false">Cancel</button>
+  </div>
+
+  <div class="spinner" ng-if="{spinning: $ctrl.spinning || !$ctrl.reference.square}" ng-class="{spinning: $ctrl.spinning || !$ctrl.reference.square}">
+    spin
+  </div>
+
+  <a class="biglink" ui-sref="reference({id:'{{$ctrl.reference.id}}'})">
+    <img class="square" ng-src="{{$ctrl.reference.square}}">
+  </a>
+</div>
