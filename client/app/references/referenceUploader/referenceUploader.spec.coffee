@@ -3,11 +3,7 @@ require '../references.coffee'
 describe "referenceUploader", ->
   beforeEach(window.module('references'))
 
-  beforeEach inject (
-    @$rootScope,
-    @$componentController,
-    @$compile,
-    ) ->
+  beforeEach inject (@$rootScope, @$componentController) ->
 
   describe "Controller", -> 
     beforeEach ->

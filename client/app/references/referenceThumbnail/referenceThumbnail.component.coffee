@@ -4,7 +4,6 @@ spinner = require '../../common/spinner.svg'
 
 class ReferenceThumbnailController
   constructor: (@ReferenceService) ->
-    @url = "https://s3-us-west-2.amazonaws.com/diiq-reference-dev/#{@reference.id}/original"
     @spinning = false
     @spinnerURL = spinner
 
