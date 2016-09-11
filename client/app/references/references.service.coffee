@@ -1,9 +1,10 @@
 _ = require 'lodash'
+Cache = require '../common/cache.coffee'
 
 class ReferenceService 
   constructor: (@$http, @$rootScope, config) ->
     this.url = config.apiBase + '/api/v1/references'
-    @cache = new ReferenceCache()
+    @cache = new Cache()
 
   urlFor: (reference) ->
     @url + "/" + reference.id
@@ -19,14 +20,14 @@ class ReferenceService
       _.update reference, response.data
     reference
 
-  newReference: () ->
+  newReference: (ref) ->
     @$http.post @url, 
-      reference: { notes: null }
+      reference: ref || {}
     .then (response) =>
       @cache.add(response.data)
 
-  newReferenceFromFile: (file) ->
-    @newReference().then (reference) =>
+  newReferenceFromFile: (file, ref) ->
+    @newReference(ref).then (reference) =>
       @$http.put reference.presigned_put, file,
         headers:
           'If-Modified-Since': undefined
@@ -34,15 +35,14 @@ class ReferenceService
         # the default url is the s3 upload url
         @setFromURL(reference)
 
-  newReferenceFromURL: (url) ->
-    @newReference().then (reference) =>
+  newReferenceFromURL: (url, ref) ->
+    @newReference(ref).then (reference) =>
       @setFromURL(reference, url)
 
   setFromURL: (reference, url) ->
     @$http.post @urlFor(reference) + "/set_from_url",
       url: url
     .then (response) =>
-      console.log @cache
       reference = @cache.find(reference.id)
       _.merge reference, response.data
       reference

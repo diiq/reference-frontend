@@ -1,6 +1,7 @@
 angular.module('home', [
   'ui.router',
-  'references'
+  'references',
+  'tags'
 ])
 
 .config ($stateProvider, $urlRouterProvider) ->
@@ -12,6 +13,8 @@ angular.module('home', [
     resolve: 
       references: (ReferenceService) -> 
         ReferenceService.references()
+      tags: (TagService) ->
+        TagService.tags()
       
 require './home.component.coffee'
 

@@ -2,16 +2,20 @@ template = require './home.html';
 require './home.scss';
 
 class HomeController
-  constructor: (@ReferenceService, $scope) ->
-    $scope.$on 'reference:new', (event, data) =>
-      console.log(data, @references.length)
-      @references.push(data.reference)
-      console.log(@references.length)
-    
+  constructor: () ->
+    @chosenTags = []
+
+  referenceFilter: (reference) =>
+    for tag in @chosenTags
+      if reference.tagIDs.indexOf(tag.id) == -1
+        return false
+    return true
+      
 angular.module('home').component 'home',
   restrict: 'E'
   bindings:
      references: '='
+     tags: '='
   template: template,
   controller: HomeController
 

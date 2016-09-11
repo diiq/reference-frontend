@@ -5,10 +5,9 @@ $column: 90px;
 $gutter: 12px;
 $grid-columns: 12;
 
-$max-width: em(1024);
-$mobile: em(480);
-$tablet: em(1024);
-
+$max-width: 1024px;
+$mobile: 480px;
+$tablet: 1024px;
 
 // When the screen is wider than the max grid width
 $max-width-grid: new-breakpoint(min-width $tablet 12);

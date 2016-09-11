@@ -1,1 +1,11 @@
-<div id="reference-uploader-drop" ng-show="$ctrl.dropping"></div>
+<div id="reference-uploader-overlay" ng-show="$ctrl.dropping">
+  <div id="reference-uploader-drop-tagged" ng-show="$ctrl.chosenTags.length">
+    Drop here to upload images to these tags:
+    <taglet ng-repeat="tag in $ctrl.chosenTags" tag="tag">
+    </taglet>
+  </div>
+
+  <div id="reference-uploader-drop-untagged">
+    Drop here to upload images with no tags
+  </div>
+</div>

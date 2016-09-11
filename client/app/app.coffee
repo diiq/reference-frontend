@@ -6,6 +6,7 @@ require '../bower_components/angular-cookie/angular-cookie'
 require '../bower_components/ng-token-auth/dist/ng-token-auth'
 
 require './references/references.coffee'
+require './tags/tags.coffee'
 require './home/home.coffee'
 require './users/users.coffee'
 
@@ -19,7 +20,7 @@ angular.module('app', [
 ])
 
 .config ($locationProvider) -> 
-  $locationProvider.hashPrefix('!');
+  $locationProvider.hashPrefix('!')
 
 .config ($authProvider, config) -> 
   $authProvider.configure

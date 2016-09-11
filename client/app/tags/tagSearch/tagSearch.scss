@@ -1,0 +1,64 @@
+@import '../../common/common';
+
+tag-search {
+  margin-bottom: $base-spacing;
+  @include span-columns(12);
+
+  .border {
+    position: relative;
+    background-color: #fff;
+    padding: $base-spacing;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .focused {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 5px transparentize($orange, 0.5);
+  }
+
+  .tags {
+    transition: max-height .5s;
+    max-height: 0px;
+    overflow: hidden;
+    
+    &.open {
+      max-height: 200px;
+      margin-bottom: $base-spacing;
+    }
+  }
+
+  .sub-input[type="text"] {
+    padding: 0;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 0px;
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+      border: 0;
+    }
+  }
+
+  .autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+
+    .autocomplete-tag {
+      padding: $base-spacing/2 $base-spacing;
+      .fa-tag {
+        margin-right: $base-spacing / 2;
+      }
+    
+      &.highlighted {
+        background-color: $light-gray;
+      }
+    }
+  }
+}

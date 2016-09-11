@@ -1,0 +1,51 @@
+@import '../../common/common';
+
+taglet {
+  background-color: $yellow;
+  padding: 4px;
+  margin: $base-spacing $base-spacing $base-spacing 0;
+  font-size: .9em;
+  line-height: 2;
+
+  &.highlighted {
+    background-color: $orange;
+    .tag {
+      display: none;
+    }
+
+    .remove {
+      display: inline-block;
+    }
+  }
+
+  a {
+    color: $dark-gray;
+    &:hover {
+      color: lighten($dark-gray, 20%);
+    }
+  }
+
+  .tag {
+    width: 13px;
+    color: $orange;
+  }
+
+  .remove {
+    display: none;
+    width: 13px;
+    cursor: pointer;
+    &:hover {
+      color: lighten($dark-gray, 20%);
+    }
+  }
+
+  &:hover {
+    .tag {
+      display: none;
+    }
+
+    .remove {
+      display: inline-block;
+    }
+  }
+}

@@ -1,26 +1,49 @@
 template = require './referenceUploader.html'
 css = require './referenceUploader.scss'
 he = require 'he'
+_ = require 'lodash'
 
 class ReferenceUploaderController
   constructor: (@$scope, @ReferenceService, @$http) ->
-    document.body.addEventListener 'dragenter', @eventHandler(@dragEnter), false
+    @dropping = 0
 
-    dropbox = document.getElementById 'reference-uploader-drop'
-    if dropbox
-      dropbox.addEventListener 'dragleave', @eventHandler(@dragLeave), false
-      dropbox.addEventListener 'dragover', @eventHandler(@dragOver), false
-      dropbox.addEventListener 'drop', @eventHandler(@drop), false
+    document.body.addEventListener 'dragenter', @eventHandler(@dragEnter), false
+    document.body.addEventListener 'dragleave', @eventHandler(@dragLeave), false
       
+    taggedDrop = document.getElementById 'reference-uploader-drop-tagged'
+    untaggedDrop = document.getElementById 'reference-uploader-drop-untagged'
+    overlay = document.getElementById 'reference-uploader-overlay'
+    # These ifs are here for tests; that's the only time they'll be falsy.
+    # TODO: write a directive for these listeners.
+    if taggedDrop
+      taggedDrop.addEventListener 'dragover', @eventHandler(@dragOver), false
+      taggedDrop.addEventListener 'drop', @eventHandler(@dropTagged), false
+      taggedDrop.addEventListener 'dragenter', @eventHandler(@dragEnter), false
+      taggedDrop.addEventListener 'dragleave', @eventHandler(@dragLeave), false
+
+    if untaggedDrop
+      untaggedDrop.addEventListener 'dragover', @eventHandler(@dragOver), false
+      untaggedDrop.addEventListener 'drop', @eventHandler(@dropUntagged), false
+      untaggedDrop.addEventListener 'dragenter', @eventHandler(@dragEnter), false
+      untaggedDrop.addEventListener 'dragleave', @eventHandler(@dragLeave), false
+
   dragEnter: =>
-    @dropping = true
+    @dropping += 1
 
   dragLeave: =>
-    @dropping = false
+    @dropping = Math.max(@dropping - 1, 0)
 
   dragOver: (event) =>
     # This looks silly, but we need an event handler here to stop
     # propogation so that the drag-n-drop will behave.
+
+  dropTagged: (event) =>
+    @uploadTags = _.map(@chosenTags, 'id')
+    @drop(event)
+
+  dropUntagged: (event) =>
+    @uploadTags = []
+    @drop(event)
     
   drop: (event) =>
     @dropping = false
@@ -36,7 +59,7 @@ class ReferenceUploaderController
   
   transferFiles: (files) ->
     for file in files
-      @ReferenceService.newReferenceFromFile(file)
+      @ReferenceService.newReferenceFromFile(file, tag_ids: @uploadTags)
     files.length
       
   html: (data) ->
@@ -48,7 +71,7 @@ class ReferenceUploaderController
     match = html.match(@srcRegex)
     if match
       url = he.decode(match[1])
-      @ReferenceService.newReferenceFromURL(url)
+      @ReferenceService.newReferenceFromURL(url, tag_ids: @uploadTags)
       true
 
   url: (data) ->
@@ -58,7 +81,7 @@ class ReferenceUploaderController
 
   transferURL: (url) ->
     if url.match(@urlRegex)
-      @ReferenceService.newReferenceFromURL(url)
+      @ReferenceService.newReferenceFromURL(url, tag_ids: @uploadTags)
       true
       
   eventHandler: (fn) ->
@@ -72,5 +95,7 @@ class ReferenceUploaderController
 angular.module('references').component 'referenceUploader',
   restrict: 'E'
   template: template
+  bindings:
+    chosenTags: '='
   controller: ReferenceUploaderController
 

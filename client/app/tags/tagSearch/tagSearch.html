@@ -1,0 +1,25 @@
+<div class="border" ng-class="{focused: focused}">
+  <div class="tags" ng-class="{open: $ctrl.chosenTags.length}">
+    <taglet ng-repeat="tag in $ctrl.chosenTags" 
+            tag="tag" 
+            ng-class="{highlighted: $index == $ctrl.removableTag}"></taglet>
+  </div>
+  <input type="text" 
+         class="sub-input" 
+         ng-model="$ctrl.tagInput" 
+         ng-focus="focused = true"
+         ng-blur="focused = false"
+         ng-change="$ctrl.getSuggestedTags()"
+         ng-keydown="$ctrl.manageKeys($event)"></input>
+
+  <div class="autocomplete" ng-if="$ctrl.tagInput">
+    <div class="autocomplete-tag" 
+         ng-repeat="tag in $ctrl.suggestedTags"
+         ng-class="{highlighted: $index == $ctrl.highlightedTag}">
+      <i class="fa fa-tag"></i>
+      {{ tag.name }}
+    </div>
+  </div>
+</div>
+
+

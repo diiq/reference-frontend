@@ -1,7 +1,11 @@
-<reference-uploader></reference-uploader>
+<reference-uploader chosen-tags="$ctrl.chosenTags"></reference-uploader>
+
+<div class="grid-container">
+<tag-search tags="$ctrl.tags" chosen-tags="$ctrl.chosenTags"></tag-search>
+</div>
 <div class="grid-container">
   <reference-thumbnail 
-     ng-repeat="reference in $ctrl.references track by reference.id"
+     ng-repeat="reference in $ctrl.references | filter:$ctrl.referenceFilter track by reference.id"
      reference="reference">
   </reference-thumbnail>
 </div>
