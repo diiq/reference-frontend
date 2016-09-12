@@ -1,0 +1,39 @@
+.centered-box {
+  @include span-columns(6);
+  @include shift(3);
+  margin-top: $base-spacing * 4;
+  overflow: auto;
+  background-color: #fff;
+  padding-bottom: $base-spacing;
+
+  @include media($tablet-grid) {
+    @include span-columns(6);
+    @include shift(1);
+    margin-top: $base-spacing;
+  }
+
+  @include media($mobile-grid) {
+    @include span-columns(4);
+    @include shift(0);
+    margin-top: $base-spacing;
+  }
+
+  label,
+  p,
+  button {
+    margin-right: $base-spacing * 2;
+    margin-left: $base-spacing * 2;
+  }
+
+  .title {
+    margin: 0 0 ($base-spacing * 1.25) 0;
+    background-color: $dark-gray;
+    padding: ($base-spacing / 2) $base-spacing;
+    color: #fff;
+  }
+
+  button {
+    float: right;
+    margin: $base-spacing $base-spacing * 2;
+  }
+}

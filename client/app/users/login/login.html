@@ -1,13 +1,12 @@
-<div class="centered-box"> 
-  <div class="title"> <h4> Login </h4> </div> 
+<img class="logo" ng-src="{{$ctrl.logoURL}}">
+
+<div class="centered-box">
+  <div class="title"><h4>Login</h4> </div> 
+
   <form ng-submit="$ctrl.submit()" class="ng-pristine ng-valid"> 
 
     <label> Email <input type="text" ng-model="$ctrl.email" autofocus="" class="ng-pristine ng-valid ng-touched"> </label> 
     <label> Password <input type="password" ng-model="$ctrl.password" class="ng-pristine ng-untouched ng-valid"> </label> 
-    <div class="no-login-links"> 
-      <a ui-sref="home">Sign up</a> or 
-      <a ui-sref="forgotten-password">recover your password</a>
-    </div> 
     <button class="primary"> Login </button> 
   </form> 
 </div>

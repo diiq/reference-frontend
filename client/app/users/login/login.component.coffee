@@ -1,9 +1,11 @@
 template = require './login.html'
+logoURL = require '../../common/logo.svg'
 require './login.scss'
 
 class LoginController 
   constructor: (@$auth, @$http, @$state) ->
-
+    @logoURL = logoURL
+    
   submit: () ->
     @$auth.submitLogin
         email: this.email

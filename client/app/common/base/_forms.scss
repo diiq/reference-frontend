@@ -7,14 +7,14 @@ fieldset {
 
 legend {
   font-weight: 600;
-  margin-bottom: $small-spacing / 2;
+  margin-bottom: $base-spacing;
   padding: 0;
 }
 
 label {
   display: block;
   font-weight: 600;
-  margin-bottom: $small-spacing / 2;
+  margin-bottom: $base-spacing;
 }
 
 input,
@@ -27,28 +27,22 @@ textarea {
 
 #{$all-text-inputs} {
   appearance: none;
-  background-color: $base-background-color;
-  border: $base-border;
-  border-radius: $base-border-radius;
+  background-color: #fff;
   box-shadow: $form-box-shadow;
   box-sizing: border-box;
-  margin-bottom: $small-spacing;
+  border: 0;
+  margin-bottom: $base-spacing;
   padding: $base-spacing / 3;
   transition: border-color $base-duration $base-timing;
   width: 100%;
 
-  &:hover {
-    border-color: shade($base-border-color, 20%);
-  }
-
   &:focus {
-    border-color: $action-color;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
 
   &:disabled {
-    background-color: shade($base-background-color, 5%);
+    background-color: shade(#fff, 5%);
     cursor: not-allowed;
 
     &:hover {

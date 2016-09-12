@@ -8,11 +8,11 @@ tag-search {
     position: relative;
     background-color: #fff;
     padding: $base-spacing;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: $form-box-shadow;
   }
 
   .focused {
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 5px transparentize($orange, 0.5);
+    box-shadow: $form-box-shadow-focus;
   }
 
   .tags {

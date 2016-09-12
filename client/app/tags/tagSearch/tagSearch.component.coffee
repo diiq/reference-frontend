@@ -50,11 +50,11 @@ class tagSearchController
 
     # If a tag is already selected, remove it. 
     else if @removableTag >= 0
-      @removeTag()
+      @removeTag(@removableTag)
       @removableTag = Math.min(@removableTag, @chosenTags.length - 1)
         
-  removeTag: () ->
-    @chosenTags.splice(@removableTag, 1);
+  removeTag: (index) ->
+    @chosenTags.splice(index, 1);
 
 angular.module('tags').component 'tagSearch',
   restrict: 'E'

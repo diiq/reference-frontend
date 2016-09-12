@@ -2,6 +2,7 @@
   <div class="tags" ng-class="{open: $ctrl.chosenTags.length}">
     <taglet ng-repeat="tag in $ctrl.chosenTags" 
             tag="tag" 
+            on-remove="$ctrl.removeTag($index)"
             ng-class="{highlighted: $index == $ctrl.removableTag}"></taglet>
   </div>
   <input type="text" 
@@ -15,6 +16,8 @@
   <div class="autocomplete" ng-if="$ctrl.tagInput">
     <div class="autocomplete-tag" 
          ng-repeat="tag in $ctrl.suggestedTags"
+         ng-mouseover="$ctrl.highlightedTag = $index"
+         ng-click="$ctrl.select()"
          ng-class="{highlighted: $index == $ctrl.highlightedTag}">
       <i class="fa fa-tag"></i>
       {{ tag.name }}
