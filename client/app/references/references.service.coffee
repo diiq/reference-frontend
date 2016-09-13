@@ -10,15 +10,19 @@ class ReferenceService
     @url + "/" + reference.id
 
   references: () ->
-    @$http.get(@url).then (response) =>
-      @cache.refresh response.data.references
+    if @cache.stale()
+      @$http.get(@url).then (response) =>
+        @cache.refresh response.data.references
     @cache.array
 
   reference: (id) ->
     reference = @cache.find(id)
-    @$http.get(@url + "/#{id}").then (response) -> 
-      _.update reference, response.data
-    reference
+    if @cache.stale()
+      @$http.get(@url + "/#{id}").then (response) -> 
+        _.assign reference, response.data
+        reference
+    else
+      reference
 
   newReference: (ref) ->
     @$http.post @url, 
@@ -44,37 +48,26 @@ class ReferenceService
       url: url
     .then (response) =>
       reference = @cache.find(reference.id)
-      _.merge reference, response.data
+      _.assign reference, response.data
       reference
 
   delete: (reference) ->
     @$http.delete(@urlFor(reference)).then =>
       @cache.remove(reference.id)
 
+  addTag: (reference, tag) ->
+    @$http.post @urlFor(reference) + "/add_tag",
+      tag_id: tag.id
+    .then (response) =>
+      _.assign @cache.find(reference.id), response.data
 
-class ReferenceCache
-  # It's a shared array and a hash, together
-  constructor: () ->
-    @array = []
-    @hash = {}
+  removeTag: (reference, tag) ->
+    @$http.post @urlFor(reference) + "/remove_tag",
+      tag_id: tag.id
+    .then (response) =>
+      _.assign @cache.find(reference.id), response.data
 
-  find: (id) ->
-    @hash[id] || @add({id :id})
 
-  remove: (id) ->
-    delete @hash[id]
-    _.remove @array, {id: id}
-
-  add: (reference) ->
-    @array.push(reference)
-    @hash[reference.id] = reference
-    reference
-
-  refresh: (references) ->
-    @hash = {}
-    @array.length = 0
-    for reference in references
-      @add(reference)
       
 angular.module('references').service('ReferenceService', ReferenceService)
 

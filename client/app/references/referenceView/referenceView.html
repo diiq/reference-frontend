@@ -1,5 +1,16 @@
-<div>
-  <img ng-src="{{$ctrl.reference.medium}}">
-  <textarea ng-model="$ctrl.reference.notes" ng-blur="$ctrl.save">
+<div class="reference-background">
+  <img class="reference-image" ng-src="{{$ctrl.reference.medium}}">
 </div>
-
+<div class="grid-container">
+  <div class="info">
+    <label>Tags:
+      <tag-search tags="$ctrl.tags" 
+                  chosen-tags="$ctrl.chosenTags"
+                  tag-added="$ctrl.addTag(tag)"
+                  tag-removed="$ctrl.removeTag(tag)"></tag-search>
+    </label>
+    <label>Notes:
+      <textarea ng-model="$ctrl.reference.notes" ng-blur="$ctrl.save">
+      </textarea>
+  </div>
+</div>

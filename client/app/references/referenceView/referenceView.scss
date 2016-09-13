@@ -1,3 +1,29 @@
+@import '../../common/common';
+
 reference-view {
-  color: red;
+  .reference-background {
+    background-color: $dark-gray;
+    width: 100%;
+    margin-bottom: $base-spacing;
+    
+    .reference-image {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  .info {
+    @include span-columns(8);
+    @include shift(2);
+
+    @include media($tablet-grid) {
+      @include span-columns(6);
+      @include shift(1);
+    }
+
+    @include media($mobile-grid) {
+      @include span-columns(4);
+      @include shift(0);
+    }
+  }
 }

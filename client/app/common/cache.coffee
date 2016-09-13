@@ -3,7 +3,9 @@ class Cache
   constructor: () ->
     @array = []
     @hash = {}
-
+    @staleTime = 2 * 60 * 1000 # 2 minutes
+    @refreshedAt = 0
+    
   find: (id) ->
     @hash[id] || @add({id :id})
 
@@ -17,9 +19,13 @@ class Cache
     thing
 
   refresh: (things) ->
+    @refreshedAt = Date.now()
     @hash = {}
     @array.length = 0
     for thing in things
       @add(thing)
+
+  stale: ->
+    Date.now() - @refreshedAt > @staleTime
 
 module.exports = Cache

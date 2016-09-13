@@ -10,14 +10,20 @@ class TagService
     @url + "/" + tag.id
 
   tags: () ->
-    @$http.get(@url).then (response) =>
-      @cache.refresh response.data.tags
-    @cache.array
+    if @cache.stale()
+      @$http.get(@url).then (response) =>
+        @cache.refresh response.data.tags
+        @creatorTag = response.data.creatorTag
+        @earmarkTag = response.data.earmarkTag
+        @cache.array
+    else
+      @cache.array
 
   tag: (id) ->
     tag = @cache.find(id)
-    @$http.get(@url + "/#{id}").then (response) -> 
-      _.update tag, response.data
+    if @cache.stale()
+      @$http.get(@url + "/#{id}").then (response) -> 
+        _.merge tag, response.data
     tag
 
   newTag: (tag) ->

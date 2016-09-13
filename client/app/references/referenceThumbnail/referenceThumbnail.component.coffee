@@ -3,17 +3,22 @@ require './referenceThumbnail.scss'
 spinner = require '../../common/spinner.svg'
 
 class ReferenceThumbnailController
-  constructor: (@ReferenceService) ->
+  constructor: (@ReferenceService, @TagService) ->
     @spinning = false
     @spinnerURL = spinner
 
   delete: ->
     @spinning = true
-    @unhover()
     @ReferenceService.delete(@reference)
 
   toggleEarmark: ->
-    @reference.earmarked = !@reference.earmarked
+    if @earmarked()
+      @ReferenceService.removeTag(@reference, @TagService.earmarkTag)
+    else
+      @ReferenceService.addTag(@reference, @TagService.earmarkTag)
+
+  earmarked: ->
+    @reference.tagIDs.indexOf(@TagService.earmarkTag.id) != -1
 
 angular.module('references').component 'referenceThumbnail',
   restrict: 'E'

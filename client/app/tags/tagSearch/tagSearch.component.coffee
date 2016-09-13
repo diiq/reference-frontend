@@ -38,6 +38,8 @@ class tagSearchController
       @TagService.newTag({name: @tagInput}).then (tag) =>
         @chosenTags.push(tag)
     @tagInput = ""
+        
+    if @tagAdded then @tagAdded(tag: tag)
 
   maybeRemoveTag: () ->
     # If they're typing, do nothing.
@@ -54,13 +56,16 @@ class tagSearchController
       @removableTag = Math.min(@removableTag, @chosenTags.length - 1)
         
   removeTag: (index) ->
-    @chosenTags.splice(index, 1);
+    if @tagRemoved then @tagRemoved(tag: @chosenTags[index])
+    @chosenTags.splice(index, 1)
 
 angular.module('tags').component 'tagSearch',
   restrict: 'E'
   bindings: 
     tags: '='
     chosenTags: '='
+    tagAdded: '&'
+    tagRemoved: '&'
   template: template
   controller: tagSearchController
 

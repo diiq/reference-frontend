@@ -1,4 +1,6 @@
-angular.module('references', ['ui.router', 'config'])
+_ = require 'lodash'
+
+angular.module('references', ['ui.router', 'config', 'tags'])
 
 .config ($stateProvider, $urlRouterProvider) ->
   $stateProvider.state 'reference',
@@ -7,6 +9,12 @@ angular.module('references', ['ui.router', 'config'])
     resolve: 
       reference: (ReferenceService, $stateParams) -> 
         ReferenceService.reference($stateParams.id)
+        
+      tags: (TagService) ->
+        TagService.tags()
+        
+      chosenTags: (TagService, reference, tags) ->
+        _.map reference.tagIDs, (id) -> TagService.tag(id) 
       
 
 require './references.service.coffee'

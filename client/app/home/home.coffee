@@ -16,6 +16,7 @@ angular.module('home', [
     resolve: 
       references: (ReferenceService) -> 
         ReferenceService.references()
+        
       tags: (TagService) ->
         TagService.tags()
       

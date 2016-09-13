@@ -1,6 +1,6 @@
 <div class="reference-thumbnail-wrapper"
      ng-mouseleave="deleting = false"
-     ng-class="{earmarkable: earmarkable, earmarked: $ctrl.reference.earmarked}">
+     ng-class="{earmarkable: earmarkable, earmarked: $ctrl.earmarked()}">
   <div class="menu button-bar">
     <div class="earmark" 
          ng-click="$ctrl.toggleEarmark()"

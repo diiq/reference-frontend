@@ -1,6 +1,9 @@
 @import '../common/common';
 
 home {
+  display: block;
+  padding: $base-spacing 0;
+
   reference-thumbnail {
     margin-bottom: $base-spacing;
 
