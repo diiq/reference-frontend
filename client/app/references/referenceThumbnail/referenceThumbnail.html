@@ -1,14 +1,19 @@
-<div class="reference-thumbnail-wrapper" 
-     ng-mouseenter="$ctrl.hover()" 
-     ng-mouseleave="$ctrl.unhover()">
-  <div class="menu button-bar" ng-show="$ctrl.hovering">
-    <button class="delete" ng-click="$ctrl.deleting = true">
+<div class="reference-thumbnail-wrapper"
+     ng-mouseleave="deleting = false"
+     ng-class="{earmarkable: earmarkable, earmarked: $ctrl.reference.earmarked}">
+  <div class="menu button-bar">
+    <div class="earmark" 
+         ng-click="$ctrl.toggleEarmark()"
+         ng-mouseover="earmarkable = true"
+         ng-mouseout="earmarkable = false">
+    </div>
+    <button class="delete" ng-click="deleting = true">
       <i class="fa fa-trash"></i>
     </button>
   </div>
-  <div class="delete-menu button-bar" ng-class="{visible: $ctrl.deleting}">
+  <div class="delete-menu button-bar" ng-class="{visible: deleting}">
     <button class="delete" ng-click="$ctrl.delete()">Delete</button>
-    <button class="cancel" ng-click="$ctrl.deleting = false">Cancel</button>
+    <button class="cancel" ng-click="deleting = false">Cancel</button>
   </div>
 
   <div class="spinner" ng-if="$ctrl.spinning || !$ctrl.reference.square">

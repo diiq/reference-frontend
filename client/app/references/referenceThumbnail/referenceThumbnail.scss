@@ -9,6 +9,9 @@ reference-thumbnail {
     width: 100%;
     height: 100%;
 
+
+    // EARMARKING!
+
     &:after{
       content: ' ';
       display: block;
@@ -17,7 +20,7 @@ reference-thumbnail {
       position: absolute;
       border-bottom: 0px solid transparent;
       border-left: 0px solid $light-gray;
-      transition: border .5s;
+      transition: border .125s;
     }
 
     &:before{
@@ -29,10 +32,10 @@ reference-thumbnail {
       border-top: 0px solid transparent;
       border-right: 0px solid #f8f8f8;
       box-shadow: 1px 1px 1px 0px rgba(0,0,0,.3);
-      transition: border .25s;
+      transition: border .125s;
     }
 
-    &.thumbing {
+    &.earmarkable {
       &:after {
         border-bottom-width: 11px;
         border-left-width: 11px;
@@ -43,7 +46,7 @@ reference-thumbnail {
       }
     }
 
-    &.thumbed {
+    &.earmarked {
       &:after {
         border-bottom-width: 21px;
         border-left-width: 21px;
@@ -53,6 +56,8 @@ reference-thumbnail {
         border-right-width: 20px;
       }
     }
+
+    // END EARMARKING!
 
     .biglink {
       display: block;
@@ -82,20 +87,36 @@ reference-thumbnail {
     }
 
     .menu {
+      display: none;
       position: absolute;
       top: 0;
       right: 0;
-      width: 40px;
+      width: 100%;
       height: 40px;
       z-index: 150;
     
       .delete {
-        background-color: transparentize($orange, 0);
-        width: 100%;
+        background-color: $orange;
+        width: 40px;
+        float: right;
+      }
+
+      .earmark {
+        width: 40px;
+        height: 40px;
+        float: left;
+        cursor: pointer;
+      }
+    }
+
+    &:hover {
+      .menu, .delete-menu {
+        display: block;
       }
     }
 
     .delete-menu {
+      display: none;
       position: absolute;
       top: 0;
       right: 0;

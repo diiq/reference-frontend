@@ -7,17 +7,13 @@ class ReferenceThumbnailController
     @spinning = false
     @spinnerURL = spinner
 
-  delete: () ->
+  delete: ->
     @spinning = true
     @unhover()
     @ReferenceService.delete(@reference)
 
-  hover: () ->
-    @hovering = true
-
-  unhover: () ->
-    @hovering = false
-    @deleting = false
+  toggleEarmark: ->
+    @reference.earmarked = !@reference.earmarked
 
 angular.module('references').component 'referenceThumbnail',
   restrict: 'E'

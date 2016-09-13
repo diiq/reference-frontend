@@ -27,7 +27,7 @@ $yellow-hover: shade($yellow, 10%);
 $green: #AFBF1D;
 $green-hover: shade($green, 10%);
 $red: #A61A00;
-$red-hover: #e10;
+$red-hover: shade($red, 10%);
 $dark-gray: lighten($black, 15%);
 $medium-gray: lighten($black, 30%);
 $medium-gray-hover: lighten($black, 17%);

@@ -1,7 +1,10 @@
+require 'ng-infinite-scroll'
+
 angular.module('home', [
   'ui.router',
   'references',
-  'tags'
+  'tags',
+  'infinite-scroll'
 ])
 
 .config ($stateProvider, $urlRouterProvider) ->
