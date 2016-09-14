@@ -11,6 +11,7 @@ require './home/home.coffee'
 require './users/users.coffee'
 
 require 'font-awesome/css/font-awesome.css'
+spinner = require './common/spinner.svg'
 
 angular.module('app', [
   'ui.router',
@@ -37,5 +38,18 @@ angular.module('app', [
       to: (state) -> !state.data || state.data.requiresAuth
     }, authorizeTransition)
 
+  startSpin = (transition) ->
+    scope = transition.injector().get('$rootScope')
+    scope.bigSpinnerSpinning = true
 
+  stopSpin = (transition) ->
+    scope = transition.injector().get('$rootScope')
+    scope.bigSpinnerSpinning = false
+      
+  $transitionsProvider.onStart({}, startSpin);
+  $transitionsProvider.onSuccess({}, stopSpin);
+
+.run ($rootScope) ->
+  $rootScope.spinnerURL = spinner;
+  
 require './app.component.coffee'

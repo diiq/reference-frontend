@@ -21,6 +21,7 @@ reference-thumbnail {
       border-bottom: 0px solid transparent;
       border-left: 0px solid $light-gray;
       transition: border .125s;
+      z-index: 2;
     }
 
     &:before{
@@ -33,6 +34,7 @@ reference-thumbnail {
       border-right: 0px solid #f8f8f8;
       box-shadow: 1px 1px 1px 0px rgba(0,0,0,.3);
       transition: border .125s;
+      z-index: 2;
     }
 
     &.earmarkable {
@@ -62,9 +64,12 @@ reference-thumbnail {
     .biglink {
       display: block;
       line-height: 0;
+      // Be square even if the image is missing or not yet loaded
+      padding-bottom: 100%;
     }
 
     .square {
+      position: absolute;
       width: 100%;
     }
 
@@ -78,6 +83,7 @@ reference-thumbnail {
       line-height: 0;
       padding: 50% 0;
       text-align: center;
+      z-index: 1;
 
       img {
         display: inline-block;

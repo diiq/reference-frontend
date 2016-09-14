@@ -5,12 +5,11 @@ $column: 90px;
 $gutter: 12px;
 $grid-columns: 12;
 
-$max-width: 1024px;
 $mobile: 480px;
 $tablet: 1024px;
 
 // When the screen is wider than the max grid width
-$max-width-grid: new-breakpoint(min-width $tablet 12);
+$max-width-grid: new-breakpoint(min-width $tablet+1 12);
 // When the screen is too small for 12 grid columns
 $tablet-grid: new-breakpoint(max-width $tablet 8);
 // When the screen is too small for 8 grid columns

@@ -1,3 +1,11 @@
+<div class="manual-upload">
+  <div class="upload-button" 
+       ngf-select="$ctrl.manualUpload($files)"
+       accept="image/*;capture=camera" multiple>
+    &#65291;
+  </div>
+</div>
+
 <div id="reference-uploader-overlay" ng-show="$ctrl.dropping">
   <div id="reference-uploader-drop-tagged" ng-show="$ctrl.chosenTags.length">
     Drop here to upload images to these tags:

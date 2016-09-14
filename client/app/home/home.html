@@ -1,5 +1,3 @@
-<reference-uploader chosen-tags="$ctrl.chosenTags"></reference-uploader>
-
 <div class="grid-container">
   <tag-search tags="$ctrl.tags" chosen-tags="$ctrl.chosenTags"></tag-search>
 </div>
@@ -8,6 +6,8 @@
      infinite-scroll-disabled="$ctrl.referenceIndex >= $ctrl.references.length - 1"
      infinite-scroll="$ctrl.showMore()" 
      infinite-scroll-distance="1">
+  <reference-uploader chosen-tags="$ctrl.chosenTags"></reference-uploader>
+
   <reference-thumbnail 
      ng-repeat="reference in $ctrl.filteredReferences track by reference.id"
      reference="reference">

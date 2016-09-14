@@ -2,9 +2,9 @@
 
 home {
   display: block;
-  padding: $base-spacing 0;
+  margin: $base-spacing 0;
 
-  reference-thumbnail {
+  reference-thumbnail, reference-uploader {
     margin-bottom: $base-spacing;
 
     @include media($max-width-grid) {

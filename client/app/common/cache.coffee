@@ -14,7 +14,7 @@ class Cache
     _.remove @array, {id: id}
 
   add: (thing) ->
-    @array.push(thing)
+    @array.unshift(thing)
     @hash[thing.id] = thing
     thing
 

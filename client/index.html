@@ -11,9 +11,13 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
   </head>
   <body ng-app="app" ng-cloak>
+    <app></app>
 
-    <app>
-      Loading...
-    </app>
+    <div class="big-spinner" ng-if="bigSpinnerSpinning"> 
+      <div class="inner">
+        <img ng-src="{{spinnerURL}}">
+        <p>LOADING</p>
+      </div>
+    </div>
   </body>
 </html>

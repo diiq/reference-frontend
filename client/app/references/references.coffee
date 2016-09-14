@@ -1,6 +1,7 @@
 _ = require 'lodash'
+require 'ng-file-upload'
 
-angular.module('references', ['ui.router', 'config', 'tags'])
+angular.module('references', ['ui.router', 'config', 'tags', 'ngFileUpload'])
 
 .config ($stateProvider, $urlRouterProvider) ->
   $stateProvider.state 'reference',

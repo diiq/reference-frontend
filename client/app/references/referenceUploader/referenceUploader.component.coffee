@@ -54,6 +54,10 @@ class ReferenceUploaderController
             @transferFiles(@files(data)))
       alert("whoopes")
 
+  manualUpload: (files) ->
+    @uploadTags = _.map(@chosenTags, 'id')
+    @transferFiles(files)
+
   files: (data) ->
     data.files
   
