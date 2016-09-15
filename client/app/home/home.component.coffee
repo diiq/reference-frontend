@@ -38,7 +38,6 @@ class HomeController
 
   showMore: () ->
     @show += @perPage
-    console.log(@show)
     @setMoreFilteredReferences()
     
       

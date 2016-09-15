@@ -24,7 +24,6 @@ angular.module('home', [
 
       chosenTags: (tags, TagService, $stateParams) ->
         tagIDs = _.castArray($stateParams.chosenTags)
-        console.log(tagIDs)
         _.map tagIDs, (id) -> TagService.tag(id)
         
       

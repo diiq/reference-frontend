@@ -44,17 +44,14 @@ class tagSearchController
   maybeRemoveTag: () ->
     # If they're typing, do nothing.
     if @tagInput
-      console.log "you type d a thign"
       return
 
     # If they're not typing, and there are tage, select the last one.
     else if @removableTag == -1 && @chosenTags.length
-      console.log "chosing tag"
       @removableTag = @chosenTags.length - 1
 
     # If a tag is already selected, remove it. 
     else if @removableTag >= 0
-      console.log "tyina remove"
       @removeTag(@removableTag)
       @removableTag = Math.min(@removableTag, @chosenTags.length - 1)
         
