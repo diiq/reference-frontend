@@ -1,14 +1,18 @@
 template = require './home.html';
 require './home.scss';
+_ = require 'lodash'
 
 class HomeController
-  constructor: ($scope) ->
-    @chosenTags = []
+  constructor: ($scope, @$state) ->
     @filteredReferences = []
     @perPage = 36
     @show = @perPage
     $scope.$watch '$ctrl.chosenTags', @setFilteredReferences, true
     $scope.$watch '$ctrl.references.length', @setFilteredReferences
+
+
+  updateURL: ->
+    @$state.go('home', {chosenTags: _.map(@chosenTags, 'id')})
 
   referenceFilter: (reference) =>
     for tag in @chosenTags
@@ -41,8 +45,9 @@ class HomeController
 angular.module('home').component 'home',
   restrict: 'E'
   bindings:
-     references: '='
-     tags: '='
+    references: '='
+    tags: '='
+    chosenTags: '='
   template: template,
   controller: HomeController
 

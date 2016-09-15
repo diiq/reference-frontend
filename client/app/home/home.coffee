@@ -1,4 +1,5 @@
 require 'ng-infinite-scroll'
+_ = require 'lodash'
 
 angular.module('home', [
   'ui.router',
@@ -11,7 +12,8 @@ angular.module('home', [
   $urlRouterProvider.otherwise('/');
 
   $stateProvider.state 'home',
-    url: '/'
+    url: '/?chosenTags',
+    params: { chosenTags: { dynamic: true, value: [] } },
     component: 'home'
     resolve: 
       references: (ReferenceService) -> 
@@ -19,6 +21,12 @@ angular.module('home', [
         
       tags: (TagService) ->
         TagService.tags()
+
+      chosenTags: (tags, TagService, $stateParams) ->
+        tagIDs = _.castArray($stateParams.chosenTags)
+        console.log(tagIDs)
+        _.map tagIDs, (id) -> TagService.tag(id)
+        
       
 require './home.component.coffee'
 

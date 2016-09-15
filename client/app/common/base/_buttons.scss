@@ -23,7 +23,8 @@
   &:hover,
   &:focus {
     background-color: shade($action-color, 10%);
-    color: #fff;
+    outline: 0;
+    box-shadow: $base-box-shadow, $focus-box-shadow;
   }
 
   &:disabled {
@@ -41,6 +42,8 @@
   display: block;
   float: left;
   height: 100%;
+  box-shadow: none;
+
   &:focus {
     outline: 0;
   }

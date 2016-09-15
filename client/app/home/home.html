@@ -1,5 +1,8 @@
 <div class="grid-container">
-  <tag-search tags="$ctrl.tags" chosen-tags="$ctrl.chosenTags"></tag-search>
+  <tag-search tags="$ctrl.tags" 
+              chosen-tags="$ctrl.chosenTags" 
+              tag-added="$ctrl.updateURL()"
+              tag-removed="$ctrl.updateURL()"></tag-search>
 </div>
 
 <div class="grid-container"
