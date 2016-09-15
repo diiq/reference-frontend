@@ -1,6 +1,7 @@
 <div class="border" ng-class="{focused: focused}">
   <div class="tags" ng-class="{open: $ctrl.chosenTags.length}">
     <taglet ng-repeat="tag in $ctrl.chosenTags" 
+            ng-if="tag.name"
             tag="tag" 
             on-remove="$ctrl.removeTag($index)"
             ng-class="{highlighted: $index == $ctrl.removableTag}"></taglet>
