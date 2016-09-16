@@ -8,6 +8,7 @@ class HomeController
     @show = @perPage
     $scope.$watch '$ctrl.chosenTags', @resetFilteredReferences, true
     $scope.$watch '$ctrl.references.length', @setFilteredReferences
+    document.getElementById('tag-search-input').focus()
 
   updateURL: ->
     @$state.go('home', {chosenTags: _.map(@chosenTags, 'id')})

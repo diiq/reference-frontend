@@ -6,6 +6,8 @@ _ = require 'lodash'
 class tagSearchController
   constructor: (@TagService, @$filter) ->
     @tags = @TagService.tags()
+    @highlightedTag = 0
+    @removableTag = -1
 
   getSuggestedTags: () ->
     results = @$filter('filter')(@tags, {name: @tagInput}, false)

@@ -2,12 +2,14 @@
 
 action-menu {
   position: relative;
+
   .menu {
     position: absolute;
     top: 100%;
     right: 0;
     width: 250px;
     z-index: 200;
+    box-shadow: $base-box-shadow;
 
     .entry {
       display: block;
@@ -15,7 +17,6 @@ action-menu {
       cursor: pointer;
       background-color: #fff;
       padding: $base-spacing/2 $base-spacing;
-      box-shadow: $base-box-shadow;
 
       &:hover {
         background-color: $light-gray;
@@ -24,8 +25,9 @@ action-menu {
 
     .tag-all {
       @include clearfix;
-      background-color: $light-gray;
+      background-color: #fff;
       padding: $base-spacing;
+
       button {
         float: right;
       }

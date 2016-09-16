@@ -2,17 +2,20 @@ template = require './actionMenu.html'
 require './actionMenu.scss'
 
 class actionMenuController
-  constructor: (TagService) ->
+  constructor: (TagService, @$rootScope) ->
     @earmarkState = "home({chosenTags:['#{TagService.earmarkTag.id}']})"
     @shouldShowMenu = false
     
   showMenu: ->
+    @$rootScope.showOverlay = true
+    @$rootScope.onOverlayClick = @hideMenu
     @shouldShowMenu = true
     @shouldShowEntries = true
     @shouldShowTagAll = false
 
-  hideMenu: ->
+  hideMenu: =>
     @shouldShowMenu = false
+    @$rootScope.showOverlay = false
 
   showTagAll: ->
     @shouldShowMenu = true

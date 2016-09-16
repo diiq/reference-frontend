@@ -1,12 +1,11 @@
 <div class="reference-thumbnail-wrapper"
-     ng-mouseleave="deleting = false"
-     ng-class="{earmarkable: earmarkable, earmarked: $ctrl.earmarked()}">
+     ng-mouseleave="deleting = false">
+  <div class="earmark"
+       ng-class="{earmarked: $ctrl.earmarked()}"
+       ng-click="$ctrl.toggleEarmark()">
+  </div>
+
   <div class="menu button-bar">
-    <div class="earmark" 
-         ng-click="$ctrl.toggleEarmark()"
-         ng-mouseover="earmarkable = true"
-         ng-mouseout="earmarkable = false">
-    </div>
     <button class="delete" ng-click="deleting = true">
       <i class="fa fa-trash"></i>
     </button>

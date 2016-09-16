@@ -1,5 +1,5 @@
 <button class="hamburger-button" ng-click="$ctrl.showMenu()"><i class="fa fa-bars"></i></button>
-<div class="menu" ng-if="$ctrl.shouldShowMenu" ng-mouseleave="$ctrl.hideMenu()">
+<div class="menu" ng-if="$ctrl.shouldShowMenu">
   <div ng-if="$ctrl.shouldShowEntries">
     <div class="entry">
       <i class="fa fa-tags fa-fw"></i>
@@ -21,4 +21,3 @@
     <button ng-click="$ctrl.tagAll()">Tag 'em</button>
   </div>
 </div>
-
