@@ -1,0 +1,24 @@
+<button class="hamburger-button" ng-click="$ctrl.showMenu()"><i class="fa fa-bars"></i></button>
+<div class="menu" ng-if="$ctrl.shouldShowMenu" ng-mouseleave="$ctrl.hideMenu()">
+  <div ng-if="$ctrl.shouldShowEntries">
+    <div class="entry">
+      <i class="fa fa-tags fa-fw"></i>
+      List all tags
+    </div>
+    <a ui-sref="{{$ctrl.earmarkState}}" class="entry">
+      <i class="fa fa-sticky-note fa-fw"></i>
+      Earmarked references
+    </a>
+    <div class="entry" ng-click="$ctrl.showTagAll()">
+      <i class="fa fa-tag fa-fw"></i>
+      Tag all
+    </div>
+  </div>
+
+  <div class="tag-all" ng-if="$ctrl.shouldShowTagAll">
+    <label>Enter tags to add to all visible references:</label>
+    <tag-search chosen-tags="$ctrl.tagsToAdd"></tag-search>
+    <button ng-click="$ctrl.tagAll()">Tag 'em</button>
+  </div>
+</div>
+

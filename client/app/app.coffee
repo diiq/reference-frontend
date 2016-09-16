@@ -9,6 +9,7 @@ require './references/references.coffee'
 require './tags/tags.coffee'
 require './home/home.coffee'
 require './users/users.coffee'
+require './actionMenu/actionMenu.coffee'
 
 require 'font-awesome/css/font-awesome.css'
 spinner = require './common/spinner.svg'

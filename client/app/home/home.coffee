@@ -5,7 +5,8 @@ angular.module('home', [
   'ui.router',
   'references',
   'tags',
-  'infinite-scroll'
+  'infinite-scroll',
+  'actionMenu'
 ])
 
 .config ($stateProvider, $urlRouterProvider) ->
@@ -13,7 +14,9 @@ angular.module('home', [
 
   $stateProvider.state 'home',
     url: '/?chosenTags',
-    params: { chosenTags: { dynamic: true, value: [] } },
+    params:
+      chosenTags:
+        value: []
     component: 'home'
     resolve: 
       references: (ReferenceService) -> 
@@ -25,7 +28,7 @@ angular.module('home', [
       chosenTags: (tags, TagService, $stateParams) ->
         tagIDs = _.castArray($stateParams.chosenTags)
         _.map tagIDs, (id) -> TagService.tag(id)
-        
-      
+
+
 require './home.component.coffee'
 

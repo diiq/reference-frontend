@@ -5,6 +5,7 @@ _ = require 'lodash'
 
 class tagSearchController
   constructor: (@TagService, @$filter) ->
+    @tags = @TagService.tags()
 
   getSuggestedTags: () ->
     results = @$filter('filter')(@tags, {name: @tagInput}, false)
@@ -63,7 +64,6 @@ class tagSearchController
 angular.module('tags').component 'tagSearch',
   restrict: 'E'
   bindings: 
-    tags: '='
     chosenTags: '='
     tagAdded: '&'
     tagRemoved: '&'

@@ -3,13 +3,11 @@ require './home.scss';
 _ = require 'lodash'
 
 class HomeController
-  constructor: ($scope, @$state) ->
-    @filteredReferences = []
+  constructor: ($scope, @$state, @ReferenceService) ->
     @perPage = 36
     @show = @perPage
-    $scope.$watch '$ctrl.chosenTags', @setFilteredReferences, true
+    $scope.$watch '$ctrl.chosenTags', @resetFilteredReferences, true
     $scope.$watch '$ctrl.references.length', @setFilteredReferences
-
 
   updateURL: ->
     @$state.go('home', {chosenTags: _.map(@chosenTags, 'id')})
@@ -20,26 +18,29 @@ class HomeController
         return false
     return true
 
-  setFilteredReferences: =>
+  resetFilteredReferences: =>
     @show = @perPage
     @filteredReferences = []
-    @referenceIndex = 0
-    @setMoreFilteredReferences()
+    @setFilteredReferences()
 
-  setMoreFilteredReferences: =>
-    for i in [@referenceIndex...@references.length]
-      @referenceIndex = i
-      if @filteredReferences.length >= @show
-          return
-
-      reference = @references[@referenceIndex]
-      if @referenceFilter(reference)
-        @filteredReferences.push reference
+  setFilteredReferences: =>
+    @filteredReferences = @allFilteredReferences().slice(0, @show)
 
   showMore: () ->
     @show += @perPage
-    @setMoreFilteredReferences()
-    
+    @setFilteredReferences()
+
+  tagAll: (tags) ->
+    # TODO: this is v. expensive, yo
+    for ref in @allFilteredReferences()
+      for tag in tags
+        ref.spin = true # TODO: be a counter
+        @ReferenceService.addTag(ref, tag).then (newRef) ->
+          newRef.spin = false
+
+  allFilteredReferences: ->
+    _.filter @references, @referenceFilter
+
       
 angular.module('home').component 'home',
   restrict: 'E'

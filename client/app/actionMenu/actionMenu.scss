@@ -1,0 +1,34 @@
+@import '../common/common';
+
+action-menu {
+  position: relative;
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    z-index: 200;
+
+    .entry {
+      display: block;
+      color: $dark-gray;
+      cursor: pointer;
+      background-color: #fff;
+      padding: $base-spacing/2 $base-spacing;
+      box-shadow: $base-box-shadow;
+
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+
+    .tag-all {
+      @include clearfix;
+      background-color: $light-gray;
+      padding: $base-spacing;
+      button {
+        float: right;
+      }
+    }
+  }
+}

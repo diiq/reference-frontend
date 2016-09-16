@@ -4,19 +4,23 @@
 body {
   background-color: $base-background-color;
   margin: 0;
+}
 
-  .big-spinner {
-    background-color: transparentize($dark-gray, .5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    .inner {
-      color: $orange;
-      position: relative;
-      top: 45%;
-    }
+.big-spinner {
+  background-color: transparentize($dark-gray, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  .inner {
+    color: $orange;
+    position: relative;
+    top: 45%;
   }
+}
+
+.fa-sticky-note {
+  @include transform( rotate(180deg))
 }

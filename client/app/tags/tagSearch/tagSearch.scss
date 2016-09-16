@@ -1,8 +1,9 @@
 @import '../../common/common';
 
 tag-search {
-  margin-bottom: $base-spacing;
   @include span-columns(12);
+  margin-bottom: $base-spacing;
+  cursor: text;
 
   .border {
     position: relative;

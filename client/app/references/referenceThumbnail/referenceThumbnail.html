@@ -16,7 +16,7 @@
     <button class="cancel" ng-click="deleting = false">Cancel</button>
   </div>
 
-  <div class="spinner" ng-if="$ctrl.spinning || !$ctrl.reference.square">
+  <div class="spinner" ng-if="$ctrl.spinning || !$ctrl.reference.square || $ctrl.reference.spin">
     <img ng-src="{{$ctrl.spinnerURL}}">
   </div>
 

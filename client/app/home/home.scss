@@ -4,6 +4,25 @@ home {
   display: block;
   margin: $base-spacing 0;
 
+  .bar {
+    position: relative;
+
+    action-menu {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      .hamburger-button {
+        height: 35px;
+        box-shadow: none;
+      }
+
+      @include media($max-width-grid) {
+        right: $base-spacing;
+      }
+    }
+  }
+
   reference-thumbnail, reference-uploader {
     margin-bottom: $base-spacing;
 
