@@ -71,6 +71,9 @@ reference-thumbnail {
     }
 
     @media(hover: hover) {
+      .delete-menu {
+        display: none;
+      }
       &:hover {
         .menu, .delete-menu {
           display: block;
@@ -79,7 +82,6 @@ reference-thumbnail {
     }
 
     .delete-menu {
-      display: none;
       position: absolute;
       top: 0;
       right: 0;

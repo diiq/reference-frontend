@@ -1,5 +1,6 @@
 require 'angular'
 require 'angular-ui-router'
+require 'angular-touch'
 
 # TODO: better bower integration pls
 require '../bower_components/angular-cookie/angular-cookie'
@@ -20,6 +21,7 @@ angular.module('app', [
   'references'
   'users'
   'spinner'
+  'ngTouch'
 ])
 
 .config ($locationProvider) -> 
@@ -47,9 +49,15 @@ angular.module('app', [
   stopSpin = (transition) ->
     spinner = transition.injector().get('SpinnerService')
     spinner.stop()
-      
+
+  hideOverlay = (transition) ->
+    rootScope = transition.injector().get('$rootScope')
+    rootScope.showOverlay = false
+
   $transitionsProvider.onStart({}, startSpin);
   $transitionsProvider.onSuccess({}, stopSpin);
+  $transitionsProvider.onSuccess({}, hideOverlay);
+
 
 .run (SpinnerService) ->
   SpinnerService.spin()

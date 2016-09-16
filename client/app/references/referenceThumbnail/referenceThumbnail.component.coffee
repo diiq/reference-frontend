@@ -7,6 +7,7 @@ class ReferenceThumbnailController
 
   delete: ->
     @spinning = true
+    @deleting = false
     @ReferenceService.delete(@reference)
 
   toggleEarmark: ->
@@ -17,6 +18,7 @@ class ReferenceThumbnailController
 
   earmarked: ->
     @reference.tagIDs.indexOf(@TagService.earmarkTag.id) != -1
+
 
 angular.module('references').component 'referenceThumbnail',
   restrict: 'E'
