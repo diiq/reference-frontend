@@ -54,7 +54,15 @@ angular.module('app', [
     rootScope = transition.injector().get('$rootScope')
     rootScope.showOverlay = false
 
+  saveHistory = (transition) ->
+    state = transition.injector().get('$state')
+    state.previous =
+      name: transition.from().name
+      params: transition.params('from')
+
+
   $transitionsProvider.onStart({}, startSpin);
+  $transitionsProvider.onStart({}, saveHistory);
   $transitionsProvider.onSuccess({}, stopSpin);
   $transitionsProvider.onSuccess({}, hideOverlay);
 

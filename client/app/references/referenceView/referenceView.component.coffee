@@ -29,8 +29,8 @@ class referenceViewController
     @chosenTags = _.map @reference.tagIDs, (id) => @TagService.tag(id) 
 
   back: =>
-    if document.referrer.indexOf(window.location.host) != -1
-      history.go(-1)
+    if @$state.previous.name
+      @$state.go(@$state.previous.name, @$state.previous.params)
     else
       @$state.go('home')
 
