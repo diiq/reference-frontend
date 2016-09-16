@@ -3,7 +3,11 @@ require './referenceView.scss'
 _ = require 'lodash'
 
 class referenceViewController
-  constructor: (@ReferenceService, @TagService, $scope, @$state, @$rootScope) ->
+  constructor: (@ReferenceService,
+                @TagService,
+                $scope,
+                @$state,
+                @SpinnerService) ->
     $scope.$watch '$ctrl.reference.tagIDs', @setChosenTags, true
     
   addTag: (tag) ->
@@ -31,8 +35,7 @@ class referenceViewController
       @$state.go('home')
 
   delete: ->
-    @$rootScope.bigSpinnerSpinning = true
-    @$rootScope.spinnerMessage = "DELETING"
+    @SpinnerService.spin("DELETING")
     @ReferenceService.delete(@reference).then @back
 
 angular.module('references').component 'referenceView',

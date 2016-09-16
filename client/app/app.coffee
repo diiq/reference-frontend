@@ -41,19 +41,17 @@ angular.module('app', [
     }, authorizeTransition)
 
   startSpin = (transition) ->
-    scope = transition.injector().get('$rootScope')
-    scope.bigSpinnerSpinning = true
-    scope.spinnerMessage = "LOADING"
+    spinner = transition.injector().get('SpinnerService')
+    spinner.spin()
 
   stopSpin = (transition) ->
-    scope = transition.injector().get('$rootScope')
-    scope.bigSpinnerSpinning = false
+    spinner = transition.injector().get('SpinnerService')
+    spinner.stop()
       
   $transitionsProvider.onStart({}, startSpin);
   $transitionsProvider.onSuccess({}, stopSpin);
 
-.run ($rootScope) ->
-  $rootScope.bigSpinnerSpinning = true
-  $rootScope.spinnerMessage = "LOADING"
+.run (SpinnerService) ->
+  SpinnerService.spin()
   
 require './app.component.coffee'
