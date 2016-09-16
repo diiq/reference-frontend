@@ -9,9 +9,12 @@ class actionMenuController
   showMenu: ->
     @$rootScope.showOverlay = true
     @$rootScope.onOverlayClick = @hideMenu
+
+    # TODO very sloppy use a state var instead pls
     @shouldShowMenu = true
     @shouldShowEntries = true
     @shouldShowTagAll = false
+    @shouldShowUntagAll = false
 
   hideMenu: =>
     @shouldShowMenu = false
@@ -21,18 +24,31 @@ class actionMenuController
     @shouldShowMenu = true
     @shouldShowEntries = false
     @shouldShowTagAll = true
+    @shouldShowUntagAll = false
     @tagsToAdd = []
+
+  showUntagAll: ->
+    @shouldShowMenu = true
+    @shouldShowEntries = false
+    @shouldShowTagAll = false
+    @shouldShowUntagAll = true
+    @tagsToRemove = []
 
   tagAll: ->
     if @onTagAll
       @onTagAll(tags: @tagsToAdd)
     @hideMenu()
 
+  untagAll: ->
+    if @onUntagAll
+      @onUntagAll(tags: @tagsToRemove)
+    @hideMenu()
 
 angular.module('actionMenu').component 'actionMenu',
   restrict: 'E'
   bindings:
     onTagAll: '&'
+    onUntagAll: '&'
   template: template
   controller: actionMenuController
 

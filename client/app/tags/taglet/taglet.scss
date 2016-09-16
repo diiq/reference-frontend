@@ -2,10 +2,16 @@
 
 taglet {
   background-color: $yellow;
-  padding: 4px;
   margin: $base-spacing $base-spacing $base-spacing 0;
   font-size: .9em;
   line-height: 2;
+  padding: 4px 0;
+
+  .one-line {
+    padding: 0 4px;
+    display: inline-block;
+    white-space: nowrap;
+  }
 
   &.highlighted {
     background-color: $orange;

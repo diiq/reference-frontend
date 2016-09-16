@@ -1,9 +1,7 @@
 <div class="reference-thumbnail-wrapper"
      ng-mouseleave="deleting = false">
-  <div class="earmark"
-       ng-class="{earmarked: $ctrl.earmarked()}"
-       ng-click="$ctrl.toggleEarmark()">
-  </div>
+  <earmark marked="$ctrl.earmarked()"
+           ng-click="$ctrl.toggleEarmark()"></earmark>
 
   <div class="menu button-bar">
     <button class="delete" ng-click="deleting = true">

@@ -12,61 +12,11 @@ reference-thumbnail {
 
     // EARMARKING!
 
-    .earmark {
+    earmark {
       position: absolute;
       top: 0;
       left: 0;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
       z-index: 151;
-
-      &:after{
-        content: ' ';
-        display: block;
-        top: 0px;
-        left: 0px;
-        position: absolute;
-        border-bottom: 0px solid transparent;
-        border-left: 0px solid $light-gray;
-        transition: border .125s;
-      }
-
-      &:before{
-        content: ' ';
-        display: block;
-        top: 0px;
-        left: 0px;
-        position: absolute;
-        border-top: 0px solid transparent;
-        border-right: 0px solid #f8f8f8;
-        box-shadow: 1px 1px 1px 0px rgba(0,0,0,.3);
-        transition: border .125s;
-      }
-
-      @media(hover: hover) {
-        &:hover {
-          &:after {
-            border-bottom-width: 11px;
-            border-left-width: 11px;
-          }
-          &:before {
-            border-top-width: 10px;
-            border-right-width: 10px;
-          }
-        }
-      }
-
-      &.earmarked {
-        &:after {
-          border-bottom-width: 21px;
-          border-left-width: 21px;
-        }
-        &:before {
-          border-top-width: 20px;
-          border-right-width: 20px;
-        }
-      }
     }
 
     // END EARMARKING!

@@ -16,11 +16,10 @@
     <div class="big-spinner" ng-if="bigSpinnerSpinning"> 
       <div class="inner">
         <img ng-src="{{spinnerURL}}">
-        <p>LOADING</p>
+        <p ng-bind="spinnerMessage"></p>
       </div>
     </div>
 
     <div class="overlay" ng-if="showOverlay" ng-click="onOverlayClick()"></div>
-
   </body>
 </html>

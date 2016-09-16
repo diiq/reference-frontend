@@ -3,7 +3,8 @@ require './referenceView.scss'
 _ = require 'lodash'
 
 class referenceViewController
-  constructor: (@ReferenceService) ->
+  constructor: (@ReferenceService, @TagService, $scope, @$state, @$rootScope) ->
+    $scope.$watch '$ctrl.reference.tagIDs', @setChosenTags, true
     
   addTag: (tag) ->
     @ReferenceService.addTag(@reference, tag)
@@ -11,11 +12,32 @@ class referenceViewController
   removeTag: (tag) ->
     @ReferenceService.removeTag(@reference, tag)
 
-    
+  toggleEarmark: ->
+    if @earmarked()
+      @ReferenceService.removeTag(@reference, @TagService.earmarkTag)
+    else
+      @ReferenceService.addTag(@reference, @TagService.earmarkTag)
+
+  earmarked: ->
+    @reference.tagIDs.indexOf(@TagService.earmarkTag.id) != -1
+
+  setChosenTags: =>
+    @chosenTags = _.map @reference.tagIDs, (id) => @TagService.tag(id) 
+
+  back: =>
+    if document.referrer.indexOf(window.location.host) != -1
+      history.go(-1)
+    else
+      @$state.go('home')
+
+  delete: ->
+    @$rootScope.bigSpinnerSpinning = true
+    @$rootScope.spinnerMessage = "DELETING"
+    @ReferenceService.delete(@reference).then @back
+
 angular.module('references').component 'referenceView',
   restrict: 'E'
   bindings:
-    chosenTags: "="
     reference: "="
     tags: "="
   template: template

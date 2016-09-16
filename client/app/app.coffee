@@ -42,6 +42,7 @@ angular.module('app', [
   startSpin = (transition) ->
     scope = transition.injector().get('$rootScope')
     scope.bigSpinnerSpinning = true
+    scope.spinnerMessage = "LOADING"
 
   stopSpin = (transition) ->
     scope = transition.injector().get('$rootScope')

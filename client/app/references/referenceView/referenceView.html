@@ -1,5 +1,12 @@
 <div class="reference-background">
-  <img class="reference-image" ng-src="{{$ctrl.reference.medium}}">
+  <div class="reference-image">
+    <img ng-src="{{$ctrl.reference.medium}}">
+    <earmark marked="$ctrl.earmarked()"
+             ng-click="$ctrl.toggleEarmark()"></earmark>
+  </div>
+  <div class="close" ng-click="$ctrl.back()">
+    &times;
+  </div>
 </div>
 <div class="grid-container">
   <div class="info">
@@ -9,8 +16,7 @@
                   tag-added="$ctrl.addTag(tag)"
                   tag-removed="$ctrl.removeTag(tag)"></tag-search>
     </label>
-    <label>Notes:
-      <textarea ng-model="$ctrl.reference.notes" ng-blur="$ctrl.save">
-      </textarea>
+    <label>Danger Zone:</label>
+    <button class="delete" ng-click="$ctrl.delete()">Delete Reference</button>
   </div>
 </div>

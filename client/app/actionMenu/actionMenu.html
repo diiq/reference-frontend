@@ -13,11 +13,22 @@
       <i class="fa fa-tag fa-fw"></i>
       Tag all
     </div>
+
+    <div class="entry" ng-click="$ctrl.showUntagAll()">
+      <i class="fa fa-tag fa-fw"></i>
+      Untag all
+    </div>
   </div>
 
   <div class="tag-all" ng-if="$ctrl.shouldShowTagAll">
     <label>Enter tags to add to all visible references:</label>
     <tag-search chosen-tags="$ctrl.tagsToAdd"></tag-search>
     <button ng-click="$ctrl.tagAll()">Tag 'em</button>
+  </div>
+
+  <div class="tag-all" ng-if="$ctrl.shouldShowUntagAll">
+    <label>Enter tags to remove from all visible references:</label>
+    <tag-search chosen-tags="$ctrl.tagsToRemove"></tag-search>
+    <button ng-click="$ctrl.untagAll()">Untag 'em</button>
   </div>
 </div>

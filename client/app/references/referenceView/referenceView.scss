@@ -5,14 +5,47 @@ reference-view {
     background-color: $dark-gray;
     width: 100%;
     margin-bottom: $base-spacing;
-    
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+      padding: $base-spacing;
+      width: 50px;
+      height: 50px;
+      line-height: .5;
+      color: $light-gray;
+      font-size: 50px;
+    }
+
     .reference-image {
+      position: relative;
+      display: table;
       margin: 0 auto;
-      display: block;
+
+      img {
+        // Eliminate pesky line-height issues
+        display: block;
+      }
+
+      earmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .earmark {
+          &:after {
+            border-left-color: $dark-gray;
+          }
+        }
+      }
     }
   }
 
   .info {
+    margin-bottom: $base-spacing;
+
     @include span-columns(8);
     @include shift(2);
 
@@ -24,6 +57,14 @@ reference-view {
     @include media($mobile-grid) {
       @include span-columns(4);
       @include shift(0);
+    }
+
+    .delete {
+      background-color: $red;
+      &:hover,
+      &:focus {
+        background-color: $red-hover;
+      }
     }
   }
 }

@@ -39,6 +39,14 @@ class HomeController
         @ReferenceService.addTag(ref, tag).then (newRef) ->
           newRef.spin = false
 
+  untagAll: (tags) ->
+    # TODO: this is v. expensive, yo
+    for ref in @allFilteredReferences()
+      for tag in tags
+        ref.spin = true # TODO: be a counter
+        @ReferenceService.removeTag(ref, tag).then (newRef) ->
+          newRef.spin = false
+
   allFilteredReferences: ->
     _.filter @references, @referenceFilter
 

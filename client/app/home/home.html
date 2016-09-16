@@ -2,7 +2,7 @@
   <tag-search chosen-tags="$ctrl.chosenTags"
               tag-added="$ctrl.updateURL()"
               tag-removed="$ctrl.updateURL()"></tag-search>
-  <action-menu on-tag-all="$ctrl.tagAll(tags)"></action-menu>
+  <action-menu on-tag-all="$ctrl.tagAll(tags)" on-untag-all="$ctrl.untagAll(tags)"></action-menu>
 </div>
 
 <div class="grid-container"
