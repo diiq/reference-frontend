@@ -16,7 +16,7 @@ reference-thumbnail {
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 151;
+      z-index: 150;
     }
 
     // END EARMARKING!
@@ -45,10 +45,12 @@ reference-thumbnail {
       text-align: center;
       z-index: 1;
 
-      img {
+      spinner {
         display: inline-block;
         vertical-align: middle;
-        margin-top: -25px;
+        margin-top: -30px;
+        width: 60px;
+        height: 60px;
       }
     }
 
@@ -59,7 +61,7 @@ reference-thumbnail {
       right: 0;
       width: 100%;
       height: 40px;
-      z-index: 150;
+      z-index: 149;
     
       .delete {
         background-color: $orange;

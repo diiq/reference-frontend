@@ -18,6 +18,12 @@ body {
     color: $orange;
     position: relative;
     top: 45%;
+
+    spinner {
+      width: 75px;
+      height: 75px;
+      margin: auto;
+    }
   }
 }
 

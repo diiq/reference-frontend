@@ -1,11 +1,9 @@
 template = require './referenceThumbnail.html'
 require './referenceThumbnail.scss'
-spinner = require '../../common/spinner.svg'
 
 class ReferenceThumbnailController
   constructor: (@ReferenceService, @TagService) ->
     @spinning = false
-    @spinnerURL = spinner
 
   delete: ->
     @spinning = true

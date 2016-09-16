@@ -5,6 +5,7 @@ require 'angular-ui-router'
 require '../bower_components/angular-cookie/angular-cookie'
 require '../bower_components/ng-token-auth/dist/ng-token-auth'
 
+require './spinner/spinner.coffee'
 require './references/references.coffee'
 require './tags/tags.coffee'
 require './home/home.coffee'
@@ -12,13 +13,13 @@ require './users/users.coffee'
 require './actionMenu/actionMenu.coffee'
 
 require 'font-awesome/css/font-awesome.css'
-spinner = require './common/spinner.svg'
 
 angular.module('app', [
-  'ui.router',
-  'home',
-  'references',
+  'ui.router'
+  'home'
+  'references'
   'users'
+  'spinner'
 ])
 
 .config ($locationProvider) -> 
@@ -52,6 +53,7 @@ angular.module('app', [
   $transitionsProvider.onSuccess({}, stopSpin);
 
 .run ($rootScope) ->
-  $rootScope.spinnerURL = spinner;
+  $rootScope.bigSpinnerSpinning = true
+  $rootScope.spinnerMessage = "LOADING"
   
 require './app.component.coffee'

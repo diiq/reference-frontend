@@ -2,10 +2,10 @@ require 'ng-infinite-scroll'
 _ = require 'lodash'
 
 angular.module('home', [
-  'ui.router',
-  'references',
-  'tags',
-  'infinite-scroll',
+  'ui.router'
+  'references'
+  'tags'
+  'infinite-scroll'
   'actionMenu'
 ])
 
