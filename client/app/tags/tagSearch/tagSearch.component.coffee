@@ -1,7 +1,10 @@
-template = require './tagSearch.html'
-
-require './tagSearch.scss'
 _ = require 'lodash'
+
+Match = require './match.coffee'
+
+template = require './tagSearch.html'
+require './tagSearch.scss'
+
 
 class tagSearchController
   constructor: (@TagService, @$filter) ->
@@ -10,9 +13,12 @@ class tagSearchController
     @removableTag = -1
 
   getSuggestedTags: () ->
-    results = @$filter('filter')(@tags, {name: @tagInput}, false)
-    results = results.slice(0, 10)
-    results.push({name: "New tag: #{@tagInput}", id: -1})
+    if @tagInput
+      results = Match.search(@tagInput, @tags, 'name')
+      if results[0]?.name != @tagInput
+        results.push {name: "New tag: #{@tagInput}", id: -1}
+    else
+      results = []
     @suggestedTags = results
     @highlightedTag = 0
     @removableTag = -1
