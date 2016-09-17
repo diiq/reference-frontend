@@ -11,17 +11,19 @@ require './references/references.coffee'
 require './tags/tags.coffee'
 require './home/home.coffee'
 require './users/users.coffee'
+require './flash/flash.coffee'
 require './actionMenu/actionMenu.coffee'
 
 require 'font-awesome/css/font-awesome.css'
 
 angular.module('app', [
   'ui.router'
+  'ngTouch'
   'home'
   'references'
   'users'
   'spinner'
-  'ngTouch'
+  'flash'
 ])
 
 .config ($locationProvider) -> 

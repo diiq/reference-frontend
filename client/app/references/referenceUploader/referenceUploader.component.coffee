@@ -4,7 +4,7 @@ he = require 'he'
 _ = require 'lodash'
 
 class ReferenceUploaderController
-  constructor: (@$scope, @ReferenceService, @$http) ->
+  constructor: (@$scope, @ReferenceService, @$http, @FlashService) ->
     @dropping = 0
 
     document.body.addEventListener 'dragenter', @eventHandler(@dragEnter), false
@@ -52,7 +52,7 @@ class ReferenceUploaderController
     unless (@transferHTML(@html(data)) ||
             @transferURL(@url(data)) ||
             @transferFiles(@files(data)))
-      alert("whoopes")
+      @FlashService.flash("Sorry, I don't know how to upload that!", "error")
 
   manualUpload: (files) ->
     @uploadTags = _.map(@chosenTags, 'id')

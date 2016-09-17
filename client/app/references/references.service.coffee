@@ -2,7 +2,7 @@ _ = require 'lodash'
 Cache = require '../common/cache.coffee'
 
 class ReferenceService 
-  constructor: (@$http, @$rootScope, config) ->
+  constructor: (@$http, @$rootScope, config, @FlashService) ->
     this.url = config.apiBase + '/api/v1/references'
     @cache = new Cache()
 
@@ -50,6 +50,9 @@ class ReferenceService
       reference = @cache.find(reference.id)
       _.assign reference, response.data
       reference
+    ,  =>
+      @FlashService.flash("Sorry, I couldn't convert that file.", "error")
+      @delete(reference)
 
   delete: (reference) ->
     @$http.delete(@urlFor(reference)).then =>

@@ -1,0 +1,8 @@
+<div ng-if="$ctrl.visible()"
+     class="{{ $ctrl.type() }}"
+     sticky>
+  <div class="content">
+    <a class="close" ng-click="$ctrl.close()">&times;</a>
+    <span>{{$ctrl.message()}}</span>
+  </div>
+</div>

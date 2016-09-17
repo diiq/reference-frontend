@@ -1,0 +1,81 @@
+@import '../common/common';
+
+@mixin flash($color) {
+  display: block;
+  font-weight: bold;
+  padding: $base-spacing / 2;
+  background: $color;
+  color: #fff;
+  position:fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  // All links in the flash (including the close icon)
+  a {
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      color: $light-gray;
+    }
+  }
+
+  a.close {
+    cursor: pointer;
+    font-size: 25px;
+    padding: $base-spacing;
+    line-height: 5px;
+    height: 25px;
+    float: left;
+  }
+
+  span {
+    padding: $base-spacing;
+  }
+
+  // Only text links in the flash (excluding the close icon)
+  span a {
+    border-bottom: 1px solid transparentize(#fff, .7);
+
+    &:hover {
+      border-bottom: 1px solid transparentize(#fff, .7);
+    }
+  }
+
+  i {
+    margin-right: $base-spacing / 4;
+  }
+
+  .content {
+    margin: 0 auto;
+    width: $max-width;
+
+    @include media($tablet-grid) {
+      margin-right: $base-spacing;
+      margin-left: $base-spacing;
+    }
+
+    @include media($mobile-grid) {
+      margin-right: $base-spacing / 2;
+      margin-left: $base-spacing / 2;
+    }
+  }
+
+}
+
+.flash-alert {
+  @include flash($yellow);
+}
+
+.flash-error {
+  @include flash($red);
+}
+
+.flash-notice {
+  @include flash($dark-gray);
+}
+
+.flash-success {
+  @include flash($green);
+}
