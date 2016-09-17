@@ -13,6 +13,7 @@ require './home/home.coffee'
 require './users/users.coffee'
 require './flash/flash.coffee'
 require './actionMenu/actionMenu.coffee'
+require './deleteBar/deleteBar.coffee'
 
 require 'font-awesome/css/font-awesome.css'
 

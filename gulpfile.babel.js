@@ -32,7 +32,7 @@ let resolveToComponents = (glob = '') => {
 let entries = (config) => {
   return [
     path.join(__dirname, root, 'app/app.coffee'),
-    path.join(__dirname, root, 'app/config/' + config + '.coffee')
+    path.join(__dirname, root, 'app/config/' + config + '.coffee'),
   ];
 }
 
@@ -66,6 +66,9 @@ gulp.task('webpack', ['clean'], (cb) => {
 
     cb();
   });
+
+  gulp.src(path.join(__dirname, root, 'app/common/favicon.png'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('deploy', ['webpack'], () => {

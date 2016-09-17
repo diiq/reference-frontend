@@ -1,0 +1,22 @@
+<div class="close" ng-click="$ctrl.back()">
+  &times;
+</div>
+
+<div class="grid-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Tag</th>
+        <th class="count">References</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr ng-repeat="tag in $ctrl.tags">
+      <td class="tag"><a ui-sref="home({chosenTags:['{{tag.id}}']})">{{tag.name}}</a></td>
+      <td class="count">{{$ctrl.refCount(tag)}}</td>
+      <td class="actions">
+        <delete-bar on-delete="$ctrl.delete(tag)"></delete-bar>
+      </td>
+    </tr>
+  </table>
+</div>

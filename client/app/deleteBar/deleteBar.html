@@ -1,0 +1,10 @@
+<div class="menu button-bar">
+  <button class="delete" ng-click="$ctrl.deleting = true">
+    <i class="fa fa-trash"></i>
+  </button>
+</div>
+
+<div class="delete-menu button-bar" ng-class="{visible: $ctrl.deleting}">
+  <button class="delete" ng-click="$ctrl.delete()">Delete</button>
+  <button class="cancel" ng-click="$ctrl.deleting = false">Cancel</button>
+</div>

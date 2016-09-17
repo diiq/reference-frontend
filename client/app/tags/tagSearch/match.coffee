@@ -20,6 +20,9 @@ class Match
   constructor: (value, key, searchRegex) ->
     @value = value
     @name = value[key]
+    if !@name
+      @matched = false
+      return
     @regex = searchRegex
     @matchList = @name.match(searchRegex)
     if !@matchList

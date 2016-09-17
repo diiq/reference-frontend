@@ -1,0 +1,53 @@
+@import '../common/common';
+
+delete-bar {
+  position: relative;
+
+  .menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    width: 40px;
+    height: 100%;
+    
+    .delete {
+      background-color: $orange;
+      width: 40px;
+      float: right;
+    }
+  }
+
+  .delete-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
+    background-color: #fff;
+    overflow: hidden;
+    transition: width .125s;
+
+    &.visible {
+      width: 100%;
+    }
+
+    .cancel {
+      background-color: $green;
+      width: 55%;
+
+      &:hover {
+        background-color: $green-hover;
+      }
+    }
+
+    .delete {
+      width: 45%;
+      background-color: $red;
+
+      &:hover {
+        background-color: $red-hover;
+      }
+    }
+  }
+}

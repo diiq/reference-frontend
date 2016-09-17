@@ -5,16 +5,8 @@
   <earmark marked="$ctrl.earmarked()"
            ng-click="$ctrl.toggleEarmark()"></earmark>
 
-  <div class="menu button-bar">
-    <button class="delete" ng-click="$ctrl.deleting = true">
-      <i class="fa fa-trash"></i>
-    </button>
-  </div>
-
-  <div class="delete-menu button-bar" ng-class="{visible: $ctrl.deleting}">
-    <button class="delete" ng-click="$ctrl.delete()">Delete</button>
-    <button class="cancel" ng-click="$ctrl.deleting = false">Cancel</button>
-  </div>
+  <delete-bar deleting="$ctrl.deleting"
+              on-delete="$ctrl.delete()"></delete-bar>
 
   <div class="spinner" ng-if="$ctrl.spinning || !$ctrl.reference.square || $ctrl.reference.spin">
     <spinner></spinner>

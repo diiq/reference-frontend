@@ -24,6 +24,7 @@ reference-thumbnail {
     .biglink {
       display: block;
       line-height: 0;
+      cursor: pointer;
       // Be square even if the image is missing or not yet loaded
       padding-bottom: 100%;
     }
@@ -54,64 +55,36 @@ reference-thumbnail {
       }
     }
 
-    .menu {
-      display: none;
+    delete-bar {
       position: absolute;
       top: 0;
       right: 0;
-      width: 40px;
+      width: 100%;
       height: 40px;
-      z-index: 149;
-    
-      .delete {
-        background-color: $orange;
-        width: 40px;
-        float: right;
+
+      .menu {
+        z-index: 149;
+      }
+
+      .delete-menu {
+        z-index: 151;
       }
     }
 
     @media(hover: hover) {
-      .delete-menu {
+      delete-bar {
         display: none;
       }
       &:hover {
-        .menu, .delete-menu {
+        delete-bar {
           display: block;
         }
       }
     }
 
-    .delete-menu {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 40px;
-      background-color: #fff;
-      overflow: hidden;
-      transition: width .125s;
-      z-index: 150;
-
-      &.visible {
-        width: 100%;
-      }
-
-      .cancel {
-        background-color: $green;
-        width: 55%;
-
-        &:hover {
-          background-color: $green-hover;
-        }
-      }
-
-      .delete {
-        width: 45%;
-        background-color: $red;
-
-        &:hover {
-          background-color: $red-hover;
-        }
+    @media(hover: none) {
+      delete-bar .menu {
+        display: none;
       }
     }
   }

@@ -1,10 +1,10 @@
 <button class="hamburger-button" ng-click="$ctrl.showMenu()"><i class="fa fa-bars"></i></button>
 <div class="menu" ng-if="$ctrl.shouldShowMenu">
   <div ng-if="$ctrl.shouldShowEntries">
-    <div class="entry">
+    <a ui-sref="tags" class="entry">
       <i class="fa fa-tags fa-fw"></i>
       List all tags
-    </div>
+    </a>
     <a ui-sref="{{$ctrl.earmarkState}}" class="entry">
       <i class="fa fa-sticky-note fa-fw"></i>
       Earmarked references

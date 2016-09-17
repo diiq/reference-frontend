@@ -1,0 +1,54 @@
+@import '../../common/common';
+
+tag-view {
+  display: block;
+  margin-top: $base-spacing * 2;
+
+  @include media($max-width-grid) {
+    @include span-columns(8);
+    @include shift(2);
+  }
+
+  tr {
+    height: 30px;
+  }
+
+  .tag {
+    font-weight: 600;
+  }
+
+  .count {
+    text-align: right;
+  }
+
+  .actions {
+
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: $base-spacing;
+    width: 50px;
+    height: 50px;
+    line-height: .5;
+    font-size: 50px;
+  }
+
+  delete-bar {
+    display: block;
+    width: 75%;
+    height: 30px;
+    float: right;
+    button {
+      font-size: 14px;
+    }
+
+    .menu .delete {
+      background-color: transparent;
+      color: $dark-gray;
+    }
+  }
+}
