@@ -44,17 +44,23 @@ home {
   }
 
   .empty-message {
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     padding-right: $base-spacing;
+
+    h2 {
+      color: $green;
+      margin: $base-spacing * 2 0;
+    }
 
     .text {
       min-width: 50%;
     }
+
     @include media($max-width-grid) {
       @include span-columns(8);
-      display: flex; 
-    
+      display: flex;
+
       .height-er {
         padding-top: 25%;
         width: 1px;
@@ -63,7 +69,7 @@ home {
 
     @include media($tablet-grid) {
       @include span-columns(6);
-      display: flex; 
+      display: flex;
 
       .height-er {
         padding-top: 33%;
@@ -73,7 +79,7 @@ home {
 
     @include media($mobile-grid) {
       @include span-columns(2);
-      display: flex; 
+      display: flex;
 
       .height-er {
         padding-top: 100%;

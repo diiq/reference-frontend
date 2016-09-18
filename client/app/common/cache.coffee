@@ -5,9 +5,12 @@ class Cache
     @hash = {}
     @staleTime = 2 * 60 * 1000 # 2 minutes
     @refreshedAt = 0
-    
-  find: (id) ->
+
+  findOrCreate: (id) ->
     @hash[id] || @add({id :id})
+
+  find: (id) ->
+    @hash[id]
 
   remove: (id) ->
     delete @hash[id]

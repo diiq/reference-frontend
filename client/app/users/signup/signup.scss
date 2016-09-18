@@ -1,6 +1,6 @@
 @import '../../common/common';
 
-login {
+signup {
   display: block;
   margin-top: $base-spacing;
 
@@ -8,11 +8,5 @@ login {
     width: 100px;
     margin: 0px auto;
     display: block;
-  }
-
-  .no-login-links {
-    float: left;
-    margin-left: $base-spacing * 2;
-    margin-top: 13px;
   }
 }

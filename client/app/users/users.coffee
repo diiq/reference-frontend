@@ -7,8 +7,15 @@ angular.module('users', [
     .state 'login',
       url: '/login'
       component: 'login'
-      data: 
+      data:
         requiresAuth: false
 
-require './login/login.component.coffee'
+   .state 'signup',
+      url: '/signup'
+      component: 'signup'
+      data:
+        requiresAuth: false
 
+
+require './login/login.component.coffee'
+require './signup/signup.component.coffee'

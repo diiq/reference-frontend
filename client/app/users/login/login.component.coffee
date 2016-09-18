@@ -2,10 +2,10 @@ template = require './login.html'
 logoURL = require '../../common/logo.svg'
 require './login.scss'
 
-class LoginController 
+class LoginController
   constructor: (@$auth, @$http, @$state, @FlashService) ->
     @logoURL = logoURL
-    
+
   submit: () ->
     success = =>
       @FlashService.close()
@@ -31,4 +31,3 @@ angular.module('users').component 'login',
   bindings: {}
   template: template
   controller: LoginController
-

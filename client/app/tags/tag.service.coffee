@@ -1,7 +1,7 @@
 _ = require 'lodash'
 Cache = require '../common/cache.coffee'
 
-class TagService 
+class TagService
   constructor: (@$http, config) ->
     this.url = config.apiBase + '/api/v1/tags'
     @cache = new Cache()
@@ -20,14 +20,14 @@ class TagService
       @cache.array
 
   tag: (id) ->
-    tag = @cache.find(id)
     if @cache.stale()
-      @$http.get(@url + "/#{id}").then (response) -> 
-        _.merge tag, response.data
-    tag
+      @tags().then ->
+        @cache.find(id)
+    else
+      @cache.find(id)
 
   newTag: (tag) ->
-    @$http.post @url, 
+    @$http.post @url,
       tag: tag
     .then (response) =>
       @cache.add(response.data)
@@ -36,8 +36,9 @@ class TagService
     @$http.delete(@urlFor(tag)).then =>
       @cache.remove(tag.id)
 
+  tagsForReference: (reference) ->
+    goodTags = _.filter reference.tagIDs, (id) -> id != @creatorTag
+    _.map goodTags, (id) => @tag(id)
 
-      
+
 angular.module('tags').service('TagService', TagService)
-
-

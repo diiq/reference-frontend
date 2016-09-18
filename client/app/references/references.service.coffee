@@ -1,7 +1,7 @@
 _ = require 'lodash'
 Cache = require '../common/cache.coffee'
 
-class ReferenceService 
+class ReferenceService
   constructor: (@$http, @$rootScope, config, @FlashService) ->
     this.url = config.apiBase + '/api/v1/references'
     @cache = new Cache()
@@ -16,16 +16,16 @@ class ReferenceService
     @cache.array
 
   reference: (id) ->
-    reference = @cache.find(id)
+    reference = @cache.findOrCreate(id)
     if @cache.stale()
-      @$http.get(@url + "/#{id}").then (response) -> 
+      @$http.get(@url + "/#{id}").then (response) ->
         _.assign reference, response.data
         reference
     else
       reference
 
   newReference: (ref) ->
-    @$http.post @url, 
+    @$http.post @url,
       reference: ref || {}
     .then (response) =>
       @cache.add(response.data)
@@ -71,7 +71,5 @@ class ReferenceService
       _.assign @cache.find(reference.id), response.data
 
 
-      
+
 angular.module('references').service('ReferenceService', ReferenceService)
-
-

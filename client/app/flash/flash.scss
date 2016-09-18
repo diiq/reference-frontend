@@ -2,14 +2,15 @@
 
 @mixin flash($color) {
   display: block;
-  font-weight: bold;
-  padding: $base-spacing / 2;
-  background: $color;
-  color: #fff;
   position:fixed;
   top: 0;
   left: 0;
   z-index: 1000;
+  background: $color;
+  padding: $base-spacing / 2;
+  width: 100%;
+  color: #fff;
+  font-weight: bold;
 
   // All links in the flash (including the close icon)
   a {

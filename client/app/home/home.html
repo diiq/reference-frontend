@@ -7,19 +7,27 @@
 
 <div class="grid-container"
      infinite-scroll-disabled="$ctrl.referenceIndex >= $ctrl.references.length - 1"
-     infinite-scroll="$ctrl.showMore()" 
+     infinite-scroll="$ctrl.showMore()"
      infinite-scroll-distance="1">
   <reference-uploader chosen-tags="$ctrl.chosenTags" show-button="true"></reference-uploader>
 
-  <reference-thumbnail 
+  <reference-thumbnail
      ng-repeat="reference in $ctrl.filteredReferences track by reference.id"
      reference="reference">
   </reference-thumbnail>
 
-  <div class="empty-message" ng-if="$ctrl.filteredReferences.length == 0">
+  <div class="empty-message" ng-if="$ctrl.chosenTags.length && $ctrl.filteredReferences.length == 0">
     <div class="height-er"></div>
     <div class="text">
-  No images here! Upload some references to this tag by dragging and dropping images from other websites, from your computer, or by pressing that big plus.
+  There are no images in {{$ctrl.chosenTags.length > 1 ? "these tags" : "this tag"}} yet! Upload some references here by dragging and dropping images from other websites, from your computer, or by pressing the big plus.
+    </div>
+  </div>
+
+  <div class="empty-message" ng-if="!$ctrl.chosenTags.length && $ctrl.filteredReferences.length == 0">
+    <div class="height-er"></div>
+    <div class="text">
+      <h2>Welcome!</h2>
+      You haven't uploaded any images yet. Create tags for images by typing them in the box above. Upload some images by dragging and dropping images from other websites, from your computer, or by pressing the big plus.
     </div>
   </div>
 </div>

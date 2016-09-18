@@ -9,7 +9,7 @@ class referenceViewController
                 @$state,
                 @SpinnerService) ->
     $scope.$watch '$ctrl.reference.tagIDs', @setChosenTags, true
-    
+
   addTag: (tag) ->
     @ReferenceService.addTag(@reference, tag)
 
@@ -26,7 +26,7 @@ class referenceViewController
     @reference.tagIDs.indexOf(@TagService.earmarkTag.id) != -1
 
   setChosenTags: =>
-    @chosenTags = _.map @reference.tagIDs, (id) => @TagService.tag(id) 
+    @chosenTags = @TagService.tagsForReference(@reference)
 
   back: =>
     if @$state.previous.name
@@ -45,5 +45,3 @@ angular.module('references').component 'referenceView',
     tags: "="
   template: template
   controller: referenceViewController
-
-

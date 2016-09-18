@@ -1,16 +1,12 @@
 <img class="logo" ng-src="{{$ctrl.logoURL}}">
 
 <div class="centered-box">
-  <div class="title"><h4>Login</h4> </div>
+  <div class="title"><h4>&beta; Signup</h4> </div>
 
   <form ng-submit="$ctrl.submit()" class="ng-pristine ng-valid">
 
     <label> Email <input type="text" ng-model="$ctrl.email" autofocus="" class="ng-pristine ng-valid ng-touched"> </label>
     <label> Password <input type="password" ng-model="$ctrl.password" class="ng-pristine ng-untouched ng-valid"> </label>
-    <button class="primary"> Login </button>
-
-    <div class="no-login-links">
-      <a ui-sref="signup">Sign up</a>
-    </div>
+    <button class="primary"> Sign up </button>
   </form>
 </div>
