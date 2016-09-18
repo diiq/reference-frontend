@@ -11,11 +11,13 @@ class TagService
 
   tags: () ->
     if @cache.stale()
-      @$http.get(@url).then (response) =>
+      promise = @$http.get(@url).then (response) =>
         @cache.refresh response.data.tags
         @creatorTag = response.data.creatorTag
         @earmarkTag = response.data.earmarkTag
         @cache.array
+    if @cache.new()
+      promise
     else
       @cache.array
 

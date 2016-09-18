@@ -11,9 +11,12 @@ class ReferenceService
 
   references: () ->
     if @cache.stale()
-      @$http.get(@url).then (response) =>
+      promise = @$http.get(@url).then (response) =>
         @cache.refresh response.data.references
-    @cache.array
+    if @cache.new()
+      promise
+    else
+      @cache.array
 
   reference: (id) ->
     reference = @cache.findOrCreate(id)
