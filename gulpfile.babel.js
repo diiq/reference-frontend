@@ -75,10 +75,29 @@ gulp.task('deploy', ['webpack'], () => {
   const awspublish = require('gulp-awspublish');
   const awspublishRouter = require('gulp-awspublish-router');
   var publisher = awspublish.create({ params: {
-    Bucket: 'www.reference-board.com' 
+    Bucket: 'www.reference-board.com'
   }});
 
+  var headers = {
+    'Cache-Control': 'max-age=300'
+    // ...
+  };
+
   gulp.src('./dist/*')
+    .pipe(awspublishRouter({
+      routes: {
+        cache: {
+            // cache for 10 minutes by default
+          cacheTime: 6000
+        },
+
+        "index.html": {
+          cacheTime: 300
+        },
+
+        "^.+$": "$&"
+      }
+    }))
     .pipe(publisher.publish())
     .pipe(publisher.sync())
     .pipe(awspublish.reporter());

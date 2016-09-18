@@ -1,14 +1,15 @@
 <button class="hamburger-button" ng-click="$ctrl.showMenu()"><i class="fa fa-bars"></i></button>
-<div class="menu" ng-if="$ctrl.shouldShowMenu">
-  <div ng-if="$ctrl.shouldShowEntries">
+<div class="menu" ng-if="$ctrl.state != 'hidden'">
+  <div ng-if="$ctrl.state == 'showEntries'">
     <a ui-sref="tags" class="entry">
       <i class="fa fa-tags fa-fw"></i>
       List all tags
     </a>
     <a ui-sref="{{$ctrl.earmarkState}}" class="entry">
       <i class="fa fa-sticky-note fa-fw"></i>
-      Earmarked references
+      View earmarked references
     </a>
+
     <div class="entry" ng-click="$ctrl.showTagAll()">
       <i class="fa fa-tag fa-fw"></i>
       Tag all
@@ -20,13 +21,13 @@
     </div>
   </div>
 
-  <div class="tag-all" ng-if="$ctrl.shouldShowTagAll">
+  <div class="tag-all" ng-if="$ctrl.state == 'tagAll'">
     <label>Enter tags to add to all visible references:</label>
     <tag-search chosen-tags="$ctrl.tagsToAdd"></tag-search>
     <button ng-click="$ctrl.tagAll()">Tag 'em</button>
   </div>
 
-  <div class="tag-all" ng-if="$ctrl.shouldShowUntagAll">
+  <div class="tag-all" ng-if="$ctrl.state == 'untagAll'">
     <label>Enter tags to remove from all visible references:</label>
     <tag-search chosen-tags="$ctrl.tagsToRemove"></tag-search>
     <button ng-click="$ctrl.untagAll()">Untag 'em</button>

@@ -9,10 +9,17 @@
      infinite-scroll-disabled="$ctrl.referenceIndex >= $ctrl.references.length - 1"
      infinite-scroll="$ctrl.showMore()" 
      infinite-scroll-distance="1">
-  <reference-uploader chosen-tags="$ctrl.chosenTags"></reference-uploader>
+  <reference-uploader chosen-tags="$ctrl.chosenTags" show-button="true"></reference-uploader>
 
   <reference-thumbnail 
      ng-repeat="reference in $ctrl.filteredReferences track by reference.id"
      reference="reference">
   </reference-thumbnail>
+
+  <div class="empty-message" ng-if="$ctrl.filteredReferences.length == 0">
+    <div class="height-er"></div>
+    <div class="text">
+  No images here! Upload some references to this tag by dragging and dropping images from other websites, from your computer, or by pressing that big plus.
+    </div>
+  </div>
 </div>

@@ -1,5 +1,6 @@
 <div class="manual-upload">
-  <div class="upload-button" 
+  <div class="upload-button"
+       ng-if="$ctrl.showButton"
        ngf-select="$ctrl.manualUpload($files)"
        accept="image/*;capture=camera" multiple>
     &#65291;
@@ -7,13 +8,30 @@
 </div>
 
 <div id="reference-uploader-overlay" ng-show="$ctrl.dropping">
-  <div id="reference-uploader-drop-tagged" ng-show="$ctrl.chosenTags.length">
-    Drop here to upload images to these tags:
-    <taglet ng-repeat="tag in $ctrl.chosenTags" tag="tag">
-    </taglet>
+  <div id="reference-uploader-drop-tagged"
+       ng-show="$ctrl.chosenTags.length"
+       drag-target
+       on-drag-over="$ctrl.dragOver(event)"
+       on-drag-enter="$ctrl.dragEnter(event)"
+       on-drag-leave="$ctrl.dragLeave(event)"
+       on-drop="$ctrl.dropTagged(event)">
+    <div class="big-centered">
+      <i class="fa fa-cloud-upload fa-2x"></i>
+      <p>Drop here to upload images to these tags:</p>
+      <taglet ng-repeat="tag in $ctrl.chosenTags" tag="tag">
+      </taglet>
+    </div>
   </div>
 
-  <div id="reference-uploader-drop-untagged">
-    Drop here to upload images with no tags
+  <div id="reference-uploader-drop-untagged"
+       drag-target
+       on-drag-over="$ctrl.dragOver(event)"
+       on-drag-enter="$ctrl.dragEnter(event)"
+       on-drag-leave="$ctrl.dragLeave(event)"
+       on-drop="$ctrl.dropUntagged(event)">
+    <div class="big-centered">
+      <i class="fa fa-cloud-upload fa-2x"></i>
+      <p>Drop here to upload images with no tags</p>
+    </div>
   </div>
 </div>

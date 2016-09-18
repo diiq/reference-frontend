@@ -1,2 +1,2 @@
 angular.module('config', []).constant 'config',
-  apiBase: 'http://api.reference-board.com'
+  apiBase: 'https://api.reference-board.com'

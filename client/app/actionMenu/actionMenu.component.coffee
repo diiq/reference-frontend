@@ -4,34 +4,23 @@ require './actionMenu.scss'
 class actionMenuController
   constructor: (TagService, @$rootScope) ->
     @earmarkState = "home({chosenTags:['#{TagService.earmarkTag.id}']})"
-    @shouldShowMenu = false
+    @state = 'hidden'
     
   showMenu: ->
     @$rootScope.showOverlay = true
     @$rootScope.onOverlayClick = @hideMenu
-
-    # TODO very sloppy use a state var instead pls
-    @shouldShowMenu = true
-    @shouldShowEntries = true
-    @shouldShowTagAll = false
-    @shouldShowUntagAll = false
+    @state = 'showEntries'
 
   hideMenu: =>
-    @shouldShowMenu = false
+    @state = 'hidden'
     @$rootScope.showOverlay = false
 
   showTagAll: ->
-    @shouldShowMenu = true
-    @shouldShowEntries = false
-    @shouldShowTagAll = true
-    @shouldShowUntagAll = false
+    @state = 'tagAll'
     @tagsToAdd = []
 
   showUntagAll: ->
-    @shouldShowMenu = true
-    @shouldShowEntries = false
-    @shouldShowTagAll = false
-    @shouldShowUntagAll = true
+    @state = 'untagAll'
     @tagsToRemove = []
 
   tagAll: ->

@@ -1,93 +1,60 @@
 template = require './referenceUploader.html'
 css = require './referenceUploader.scss'
-he = require 'he'
 _ = require 'lodash'
 
 class ReferenceUploaderController
-  constructor: (@$scope, @ReferenceService, @$http, @FlashService) ->
+  constructor: (@$scope, @ReferenceService, @$http, @FlashService, @ReferencesFromDataTransfer) ->
     @dropping = 0
 
-    document.body.addEventListener 'dragenter', @eventHandler(@dragEnter), false
-    document.body.addEventListener 'dragleave', @eventHandler(@dragLeave), false
-      
-    taggedDrop = document.getElementById 'reference-uploader-drop-tagged'
-    untaggedDrop = document.getElementById 'reference-uploader-drop-untagged'
-    overlay = document.getElementById 'reference-uploader-overlay'
-    # These ifs are here for tests; that's the only time they'll be falsy.
-    # TODO: write a directive for these listeners.
-    if taggedDrop
-      taggedDrop.addEventListener 'dragover', @eventHandler(@dragOver), false
-      taggedDrop.addEventListener 'drop', @eventHandler(@dropTagged), false
-      taggedDrop.addEventListener 'dragenter', @eventHandler(@dragEnter), false
-      taggedDrop.addEventListener 'dragleave', @eventHandler(@dragLeave), false
+  $onInit: ->
+    @bodyEnter = @eventHandler(@dragEnter)
+    @bodyLeave = @eventHandler(@dragLeave)
+    document.body.addEventListener 'dragenter', @bodyEnter, false
+    document.body.addEventListener 'dragleave', @bodyLeave, false
+    window.onbeforeunload = @pageLeave
 
-    if untaggedDrop
-      untaggedDrop.addEventListener 'dragover', @eventHandler(@dragOver), false
-      untaggedDrop.addEventListener 'drop', @eventHandler(@dropUntagged), false
-      untaggedDrop.addEventListener 'dragenter', @eventHandler(@dragEnter), false
-      untaggedDrop.addEventListener 'dragleave', @eventHandler(@dragLeave), false
+  $onDestroy: ->
+    document.body.removeEventListener 'dragenter', @bodyEnter
+    document.body.removeEventListener 'dragleave', @bodyLeave
+    window.onbeforeunload = null
 
   dragEnter: =>
     @dropping += 1
 
-  dragLeave: =>
+  dragLeave: (event) =>
     @dropping = Math.max(@dropping - 1, 0)
+    event.target.classList.remove('dragover')
 
   dragOver: (event) =>
+    event.target.classList.add('dragover')
     # This looks silly, but we need an event handler here to stop
     # propogation so that the drag-n-drop will behave.
 
   dropTagged: (event) =>
+    event.target.classList.remove('dragover')
     @uploadTags = _.map(@chosenTags, 'id')
     @drop(event)
 
   dropUntagged: (event) =>
+    event.target.classList.remove('dragover')
     @uploadTags = []
     @drop(event)
-    
+
   drop: (event) =>
     @dropping = false
-    
+    @uploading = true
+
     data = event.dataTransfer
-    unless (@transferHTML(@html(data)) ||
-            @transferURL(@url(data)) ||
-            @transferFiles(@files(data)))
+    promise = @ReferencesFromDataTransfer.references(data, @uploadTags)
+    if !promise
       @FlashService.flash("Sorry, I don't know how to upload that!", "error")
+    promise.then =>
+      @uploading = false
 
   manualUpload: (files) ->
     @uploadTags = _.map(@chosenTags, 'id')
     @transferFiles(files)
 
-  files: (data) ->
-    data.files
-  
-  transferFiles: (files) ->
-    for file in files
-      @ReferenceService.newReferenceFromFile(file, tag_ids: @uploadTags)
-    files.length
-      
-  html: (data) ->
-    data.getData('text/html')
-
-  srcRegex: /src=.([^\'\"]*)/i
-  
-  transferHTML: (html) ->
-    match = html.match(@srcRegex)
-    if match
-      url = he.decode(match[1])
-      @ReferenceService.newReferenceFromURL(url, tag_ids: @uploadTags)
-      true
-
-  url: (data) ->
-    data.getData('text/plain')
-
-  urlRegex: /^https?:\/\/.*/i
-
-  transferURL: (url) ->
-    if url.match(@urlRegex)
-      @ReferenceService.newReferenceFromURL(url, tag_ids: @uploadTags)
-      true
-      
   eventHandler: (fn) ->
     (event) =>
       event.stopPropagation()
@@ -95,11 +62,20 @@ class ReferenceUploaderController
       @$scope.$apply ->
         fn(event)
 
+  pageLeave: (event) =>
+    if !@uploading
+      return undefined
+
+    message = 'Files are still uploading. ' +
+              'If you leave now, they will be lost.'
+
+    (event || window.event).returnValue = message; #Gecko + IE
+    return message;
 
 angular.module('references').component 'referenceUploader',
   restrict: 'E'
   template: template
   bindings:
     chosenTags: '='
+    showButton: '<'
   controller: ReferenceUploaderController
-

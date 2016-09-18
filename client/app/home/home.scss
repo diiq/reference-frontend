@@ -42,4 +42,43 @@ home {
       @include omega(2n);
     }
   }
+
+  .empty-message {
+    justify-content: center; 
+    align-items: center;
+    padding-right: $base-spacing;
+
+    .text {
+      min-width: 50%;
+    }
+    @include media($max-width-grid) {
+      @include span-columns(8);
+      display: flex; 
+    
+      .height-er {
+        padding-top: 25%;
+        width: 1px;
+      }
+    }
+
+    @include media($tablet-grid) {
+      @include span-columns(6);
+      display: flex; 
+
+      .height-er {
+        padding-top: 33%;
+        width: 1px;
+      }
+    }
+
+    @include media($mobile-grid) {
+      @include span-columns(2);
+      display: flex; 
+
+      .height-er {
+        padding-top: 100%;
+        width: 1px;
+      }
+    }
+  }
 }

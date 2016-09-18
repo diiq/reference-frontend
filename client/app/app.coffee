@@ -27,10 +27,10 @@ angular.module('app', [
   'flash'
 ])
 
-.config ($locationProvider) -> 
+.config ($locationProvider) ->
   $locationProvider.hashPrefix('!')
 
-.config ($authProvider, config) -> 
+.config ($authProvider, config) ->
   $authProvider.configure
     apiUrl: config.apiBase + '/api/v1'
 
@@ -40,7 +40,7 @@ angular.module('app', [
     $state = transition.injector().get('$state')
     $auth.validateUser().catch () ->
       $state.go('login')
-      
+
   $transitionsProvider.onStart({
       to: (state) -> !state.data || state.data.requiresAuth
     }, authorizeTransition)
@@ -72,5 +72,6 @@ angular.module('app', [
 
 .run (SpinnerService) ->
   SpinnerService.spin()
-  
+
 require './app.component.coffee'
+require './dragTarget.directive.coffee'

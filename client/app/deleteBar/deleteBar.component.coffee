@@ -13,8 +13,6 @@ angular.module('deleteBar').component 'deleteBar',
   restrict: 'E'
   bindings:
     onDelete: '&'
-    deleting: '<'
+    deleting: '='
   template: template
   controller: deleteBarController
-
-

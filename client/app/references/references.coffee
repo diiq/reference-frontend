@@ -7,10 +7,10 @@ angular.module('references', ['ui.router', 'config', 'tags', 'ngFileUpload', 'de
   $stateProvider.state 'reference',
     url: '/reference/:id'
     component: 'referenceView'
-    resolve: 
-      reference: (ReferenceService, $stateParams) -> 
+    resolve:
+      reference: (ReferenceService, $stateParams) ->
         ReferenceService.reference($stateParams.id)
-        
+
       tags: (TagService) ->
         TagService.tags()
 
@@ -20,4 +20,4 @@ require './referenceThumbnail/referenceThumbnail.component.coffee'
 require './referenceUploader/referenceUploader.component.coffee'
 require './referenceView/referenceView.component.coffee'
 require './earmark/earmark.component.coffee'
-
+require './referenceUploader/referencesFromDataTransfer.service.coffee'

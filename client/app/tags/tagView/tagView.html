@@ -15,7 +15,7 @@
       <td class="tag"><a ui-sref="home({chosenTags:['{{tag.id}}']})">{{tag.name}}</a></td>
       <td class="count">{{$ctrl.refCount(tag)}}</td>
       <td class="actions">
-        <delete-bar on-delete="$ctrl.delete(tag)"></delete-bar>
+        <delete-bar deleting="deleting" on-delete="$ctrl.delete(tag)"></delete-bar>
       </td>
     </tr>
   </table>

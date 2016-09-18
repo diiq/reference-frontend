@@ -6,6 +6,7 @@ taglet {
   font-size: .9em;
   line-height: 2;
   padding: 4px 0;
+  color: $dark-gray;
 
   .one-line {
     padding: 0 4px;
@@ -32,13 +33,13 @@ taglet {
   }
 
   .tag {
-    width: 13px;
+    width: 1em;
     color: $orange;
   }
 
   .remove {
     display: none;
-    width: 13px;
+    width: 1em;
     cursor: pointer;
     &:hover {
       color: lighten($dark-gray, 20%);
