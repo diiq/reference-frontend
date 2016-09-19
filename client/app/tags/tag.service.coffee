@@ -22,7 +22,7 @@ class TagService
       @cache.array
 
   tag: (id) ->
-    if @cache.stale()
+    if @cache.new()
       @tags().then ->
         @cache.find(id)
     else

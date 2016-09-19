@@ -53,7 +53,8 @@ class ReferenceUploaderController
 
   manualUpload: (files) ->
     @uploadTags = _.map(@chosenTags, 'id')
-    @transferFiles(files)
+    _.map files, (file) =>
+      @ReferenceService.newReferenceFromFile(file, tag_ids: @chosenTags)
 
   eventHandler: (fn) ->
     (event) =>

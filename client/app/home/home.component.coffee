@@ -3,7 +3,7 @@ require './home.scss';
 _ = require 'lodash'
 
 class HomeController
-  constructor: ($scope, @$state, @ReferenceService) ->
+  constructor: ($scope, @$state, @ReferenceService, @TagService) ->
     @perPage = 36
     @show = @perPage
     $scope.$watch '$ctrl.chosenTags', @resetFilteredReferences, true
@@ -50,7 +50,10 @@ class HomeController
   allFilteredReferences: ->
     _.filter @references, @referenceFilter
 
-      
+  isEarmarked: ->
+    @chosenTags.length == 1 && @chosenTags[0].id == @TagService.earmarkTag.id
+
+
 angular.module('home').component 'home',
   restrict: 'E'
   bindings:
@@ -59,5 +62,3 @@ angular.module('home').component 'home',
     chosenTags: '='
   template: template,
   controller: HomeController
-
-

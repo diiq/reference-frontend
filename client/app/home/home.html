@@ -16,7 +16,7 @@
      reference="reference">
   </reference-thumbnail>
 
-  <div class="empty-message" ng-if="$ctrl.chosenTags.length && $ctrl.filteredReferences.length == 0">
+  <div class="empty-message" ng-if="$ctrl.chosenTags.length && $ctrl.filteredReferences.length == 0 && !$ctrl.isEarmarked()">
     <div class="height-er"></div>
     <div class="text">
   There are no images in {{$ctrl.chosenTags.length > 1 ? "these tags" : "this tag"}} yet! Upload some references here by dragging and dropping images from other websites, from your computer, or by pressing the big plus.
@@ -28,6 +28,13 @@
     <div class="text">
       <h2>Welcome!</h2>
       You haven't uploaded any images yet. Create tags for images by typing them in the box above. Upload some images by dragging and dropping images from other websites, from your computer, or by pressing the big plus.
+    </div>
+  </div>
+
+  <div class="empty-message" ng-if="$ctrl.isEarmarked() && $ctrl.filteredReferences.length == 0">
+    <div class="height-er"></div>
+    <div class="text">
+      This is the earmark tag! You can earmark images at any time by tapping them in upper-left-hand corner; then they'll show up here.
     </div>
   </div>
 </div>

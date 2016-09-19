@@ -18,17 +18,16 @@ angular.module('home', [
       chosenTags:
         value: []
     component: 'home'
-    resolve: 
-      references: (ReferenceService) -> 
+    resolve:
+      references: (ReferenceService) ->
         ReferenceService.references()
-        
+
       tags: (TagService) ->
         TagService.tags()
 
       chosenTags: (tags, TagService, $stateParams) ->
         tagIDs = _.castArray($stateParams.chosenTags)
-        _.map tagIDs, (id) -> TagService.tag(id)
+        _.compact _.map tagIDs, (id) -> TagService.tag(id)
 
 
 require './home.component.coffee'
-
