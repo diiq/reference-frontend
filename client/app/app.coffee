@@ -41,7 +41,11 @@ angular.module('app', [
     $auth = transition.injector().get('$auth')
     $state = transition.injector().get('$state')
     $auth.validateUser().catch () ->
-      $state.go('landing')
+      # Hacky way to say "were you headed to /?"
+      if transition.to().name == 'home' && transition.params('to').chosenTags.length == 0
+        $state.go('landing')
+      else
+        $state.go('login')
 
   $transitionsProvider.onStart({
       to: (state) -> !state.data || state.data.requiresAuth
