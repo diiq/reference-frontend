@@ -41,7 +41,7 @@ angular.module('app', [
     $auth = transition.injector().get('$auth')
     $state = transition.injector().get('$state')
     $auth.validateUser().catch () ->
-      $state.go('login')
+      $state.go('landing')
 
   $transitionsProvider.onStart({
       to: (state) -> !state.data || state.data.requiresAuth

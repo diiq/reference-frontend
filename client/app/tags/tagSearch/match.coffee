@@ -10,6 +10,7 @@ Bonuses =
 
 class Match
   @search: (search, list, key) ->
+    search = search.toLowerCase()
     regex = new RegExp("(.*?)(" + search.split("").join(")(.*?)(") + ")(.*)")
     matches = for item in list
       new Match item, key, regex
@@ -24,7 +25,7 @@ class Match
       @matched = false
       return
     @regex = searchRegex
-    @matchList = @name.match(searchRegex)
+    @matchList = @name.toLowerCase().match(searchRegex)
     if !@matchList
       @matched = false
       return
@@ -51,7 +52,7 @@ class Match
   wordBoundaryBonus: ->
     bonus = 0
     for part in @parts
-      if part.index == 0 || @name[part.index - 1] == "-"
+      if part.index == 0 || @name[part.index - 1] == "-" || @name[part.index - 1] == " "
         bonus += Bonuses.wordBoundary
     bonus
 

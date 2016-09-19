@@ -6,14 +6,14 @@ fieldset {
 }
 
 legend {
-  font-weight: 600;
+  font-weight: bold;
   margin-bottom: $base-spacing;
   padding: 0;
 }
 
 label {
   display: block;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: $base-spacing;
 }
 
@@ -36,6 +36,8 @@ textarea {
   padding: $base-spacing;
   transition: border-color $base-duration $base-timing;
   width: 100%;
+  border-radius: 0;
+  font-weight: 300;
 
   &:focus {
     box-shadow: $form-box-shadow-focus;

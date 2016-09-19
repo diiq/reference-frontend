@@ -4,6 +4,7 @@ tag-search {
   @include span-columns(12);
   margin-bottom: $base-spacing;
   cursor: text;
+  font-weight: 300;
 
   .border {
     position: relative;
@@ -20,7 +21,7 @@ tag-search {
     transition: max-height .5s;
     max-height: 0px;
     overflow: hidden;
-    
+
     &.open {
       max-height: 200px;
       margin-bottom: $base-spacing;
@@ -57,7 +58,7 @@ tag-search {
       .fa-tag {
         margin-right: $base-spacing / 2;
       }
-    
+
       &.highlighted {
         background-color: $light-gray;
       }

@@ -4,6 +4,7 @@ signup {
   @include clearfix;
   display: block;
   margin-top: $base-spacing;
+  font-size: 16px;
 
   .centered-box {
     padding-top: $base-spacing * 2;
@@ -18,6 +19,7 @@ signup {
   .note {
     font-size: 12px;
     float: right;
+    font-weight: 300;
     margin-right: $base-spacing * 2;
   }
 

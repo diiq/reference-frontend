@@ -2,7 +2,7 @@ template = require './actionMenu.html'
 require './actionMenu.scss'
 
 class actionMenuController
-  constructor: (TagService, @$rootScope) ->
+  constructor: (TagService, @$rootScope, @$auth, @$state) ->
     @earmarkState = "home({chosenTags:['#{TagService.earmarkTag.id}']})"
     @state = 'hidden'
 
@@ -37,6 +37,10 @@ class actionMenuController
     if @onUntagAll
       @onUntagAll(tags: @tagsToRemove)
     @hideMenu()
+
+  logout: ->
+    @$auth.signOut()
+    @$state.go('login')
 
   log: (name) ->
     ga 'send',
