@@ -63,11 +63,16 @@ angular.module('app', [
       name: transition.from().name
       params: transition.params('from')
 
+  logChange = (transition) ->
+    ga 'send', 'pageview',
+      page: transition.to().name
+
 
   $transitionsProvider.onStart({}, startSpin);
   $transitionsProvider.onStart({}, saveHistory);
   $transitionsProvider.onSuccess({}, stopSpin);
   $transitionsProvider.onSuccess({}, hideOverlay);
+  $transitionsProvider.onSuccess({}, logChange);
 
 
 .run (SpinnerService) ->

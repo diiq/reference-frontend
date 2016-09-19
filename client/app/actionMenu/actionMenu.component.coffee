@@ -5,8 +5,9 @@ class actionMenuController
   constructor: (TagService, @$rootScope) ->
     @earmarkState = "home({chosenTags:['#{TagService.earmarkTag.id}']})"
     @state = 'hidden'
-    
+
   showMenu: ->
+    @log 'open'
     @$rootScope.showOverlay = true
     @$rootScope.onOverlayClick = @hideMenu
     @state = 'showEntries'
@@ -16,22 +17,33 @@ class actionMenuController
     @$rootScope.showOverlay = false
 
   showTagAll: ->
+    @log 'open tag all'
     @state = 'tagAll'
     @tagsToAdd = []
 
   showUntagAll: ->
+    @log 'open untag all'
     @state = 'untagAll'
     @tagsToRemove = []
 
   tagAll: ->
+    @log 'tag all'
     if @onTagAll
       @onTagAll(tags: @tagsToAdd)
     @hideMenu()
 
   untagAll: ->
+    @log 'untag all'
     if @onUntagAll
       @onUntagAll(tags: @tagsToRemove)
     @hideMenu()
+
+  log: (name) ->
+    ga 'send',
+      hitType: 'event'
+      eventCategory: 'action menu'
+      eventAction: 'click'
+      eventLabel: name
 
 angular.module('actionMenu').component 'actionMenu',
   restrict: 'E'
@@ -40,5 +52,3 @@ angular.module('actionMenu').component 'actionMenu',
     onUntagAll: '&'
   template: template
   controller: actionMenuController
-
-
