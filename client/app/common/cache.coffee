@@ -5,7 +5,6 @@ class Cache
     @hash = {}
     @staleTime = 2 * 60 * 1000 # 2 minutes
     @refreshedAt = 0
-    @isNew = true
 
   findOrCreate: (id) ->
     @hash[id] || @add({id :id})
@@ -18,13 +17,13 @@ class Cache
     _.remove @array, {id: id}
 
   add: (thing) ->
-    @isNew = false
     @array.unshift(thing)
     @hash[thing.id] = thing
     thing
 
   refresh: (things) ->
     @refreshedAt = Date.now()
+
     @hash = {}
     @array.length = 0
     for thing in things
@@ -34,6 +33,6 @@ class Cache
     Date.now() - @refreshedAt > @staleTime
 
   new: ->
-    @isNew
+    @refreshedAt == 0
 
 module.exports = Cache

@@ -13,6 +13,7 @@ class ReferenceService
     if @cache.stale()
       promise = @$http.get(@url).then (response) =>
         @cache.refresh response.data.references
+        @cache.array
     if @cache.new()
       promise
     else
