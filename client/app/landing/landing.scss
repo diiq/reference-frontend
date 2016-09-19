@@ -1,0 +1,168 @@
+@import '../common/common';
+
+landing {
+  font-size: 18px;
+
+  .bar {
+    width: 100%;
+    background-color: $dark-gray;
+    text-align: right;
+    .login {
+      background-color: $green;
+      &:hover, &:focus {
+        background-color: $green-hover;
+        color: #fff;
+      }
+    }
+  }
+
+  .hero {
+    width: 100%;
+    background-color: #4E668F;
+
+    .flexy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .talk {
+      flex-grow: 1;
+      min-width: 400px;
+      background-color: transparentize($dark-gray, .5);
+      padding: $base-spacing * 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: $base-spacing * 4;
+
+      @media(max-width: 767px) {
+        margin-right: 0;
+      }
+
+      .box {
+        text-align: center;
+      }
+
+      .logo {
+        width: 90px;
+        margin-bottom: $base-spacing * 2;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 35px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: $base-spacing * 4;
+        @include media($tablet-grid) {
+          font-size: 30px;
+        }
+      }
+
+      button {
+        padding: $base-spacing * 2;
+      }
+
+      &:before {
+        content: ' ';
+        display: block;
+        width: 1px;
+        padding-bottom: 65%;
+      }
+    }
+
+    .video {
+      flex-grow: 1.5;
+      margin: $base-spacing * 5 0;
+      min-width: 300px;
+      max-width: 550px;
+      text-align: center;
+      color: #fff;
+      background-color: #425689;
+
+      &:before {
+        content: ' ';
+        display: block;
+        width: 1px;
+        padding-bottom: 56%;
+        float: left;
+      }
+    }
+  }
+
+  .bullets {
+    width: 100%;
+    background-color: #fff;
+    padding: $base-spacing * 4 0;
+
+    .flexy {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .bullet {
+      max-width: 300px;
+      min-width: 200px;
+      background-color: $light-gray;
+      margin-top: $base-spacing * 4;
+      padding: $base-spacing * 4;
+      text-align: center;
+      margin: $base-spacing * 2;
+
+      .fa {
+        display: block;
+        text-align: center;
+        margin-bottom: $base-spacing * 2;
+      }
+
+      .fa-mobile {
+        font-size: 60px;
+        height: 50px;
+        margin-top: -$base-spacing;
+      }
+
+      @include media($mobile-grid) {
+        width: 100%;
+        margin: $base-spacing * 2 0;
+      }
+    }
+  }
+}
+
+.testamonial {
+  padding: 20% 0;
+  background-color: #fff;
+  text-align: center;
+  h1 {
+    margin: 0 auto;
+    max-width: 600px;
+    @include media($tablet-grid) {
+      font-size: 20px;
+    }
+    .attribution {
+      margin: $base-spacing;
+      text-align: right;
+    }
+  }
+}
+
+.story {
+  display: none;
+}
+
+.signup {
+  @include clearfix;
+  min-height: 100%;
+  padding: 10% 0;
+  background-color: #4E668F;
+}
+
+.footer {
+    width: 100%;
+    background-color: $dark-gray;
+    height: 50px;
+}

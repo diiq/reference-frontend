@@ -17,3 +17,24 @@
     margin-left: $base-spacing / 2;
   }
 }
+
+.gridless-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media($max-width-grid) {
+    padding-right: $base-spacing;
+    padding-left: $base-spacing;
+  }
+
+  @include media($tablet-grid) {
+    margin-right: $base-spacing;
+    margin-left: $base-spacing;
+  }
+
+  @include media($mobile-grid) {
+    margin-right: $base-spacing / 2;
+    margin-left: $base-spacing / 2;
+  }
+}

@@ -1,12 +1,28 @@
 @import '../../common/common';
 
 signup {
+  @include clearfix;
   display: block;
   margin-top: $base-spacing;
+
+  .centered-box {
+    padding-top: $base-spacing * 2;
+  }
 
   .logo {
     width: 100px;
     margin: 0px auto;
     display: block;
+  }
+
+  .note {
+    font-size: 12px;
+    float: right;
+    margin-right: $base-spacing * 2;
+  }
+
+  button {
+    font-size: 16px;
+    padding: $base-spacing;
   }
 }

@@ -4,6 +4,7 @@
 body {
   background-color: $base-background-color;
   margin: 0;
+
 }
 
 .big-spinner {
@@ -27,7 +28,7 @@ body {
   }
 }
 
-.fa-sticky-note {
+.fa-sticky-note, .fa-sticky-note-o {
   @include transform( rotate(180deg))
 }
 

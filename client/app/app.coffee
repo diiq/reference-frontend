@@ -14,6 +14,7 @@ require './users/users.coffee'
 require './flash/flash.coffee'
 require './actionMenu/actionMenu.coffee'
 require './deleteBar/deleteBar.coffee'
+require './landing/landing.coffee'
 
 require 'font-awesome/css/font-awesome.css'
 
@@ -25,6 +26,7 @@ angular.module('app', [
   'users'
   'spinner'
   'flash'
+  'landing'
 ])
 
 .config ($locationProvider) ->
